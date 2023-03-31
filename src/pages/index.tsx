@@ -1,9 +1,14 @@
 import Head from 'next/head'
+import React from 'react'
 import { Layout } from "antd"
 import Navbar from "@/components/Navbar"
 import styles from "@/styles/Home.module.scss"
 import LoginPage from '@/components/LoginPage'
+import { Usercontext } from '@/contexts/user'
+
 export default function Home() {
+  const {user} = React.useContext(Usercontext)
+  console.log(user)
   return (
     <>
       <Head>
@@ -17,7 +22,12 @@ export default function Home() {
           <Navbar />
         </Layout.Header>
         <Layout.Content className={styles.main}>
+          { user ?
+           "hi" 
+           :
+          
           <LoginPage />
+          }
         </Layout.Content>
       </Layout>
     </>

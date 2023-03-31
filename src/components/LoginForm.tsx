@@ -4,13 +4,14 @@ import styles from "@/styles/Login.module.scss"
 import React from 'react';
 import data from  "../userData.json"
 import Link from 'next/link';
+import { Usercontext } from '@/contexts/user';
 
 const LoginForm = ()=>{
     const { token } = theme.useToken();
     const [disabled, setDisabled] = React.useState<boolean>(false)
     const [form] = Form.useForm()
     const [showAlert,setShowAlert] = React.useState<boolean>(false)
-
+    const {user,setUser} = React.useContext(Usercontext)
     const onValuesChange =(changedValues:any,allValues:any)=>{
         if(form.isFieldTouched("password") && form.isFieldTouched("email")){
             form.validateFields()
@@ -20,8 +21,10 @@ const LoginForm = ()=>{
     }
 
     const onFinish = (values:any)=>{
-        data.some(user => user.email == values.email && user.password == values.password)?
-        setShowAlert(false) : setShowAlert(true)
+        if(data.some(user => user.email == values.email && user.password == values.password))
+        {
+          setUser(data.filter(user=> user.email == values.email && user.password == values.password)[0]);
+        }else setShowAlert(true)
     }
 
     const onFinishFeild = ()=>{

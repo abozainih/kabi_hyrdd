@@ -8,7 +8,6 @@ import { Usercontext } from '@/contexts/user'
 
 export default function Home() {
   const {user} = React.useContext(Usercontext)
-  console.log(user)
   return (
     <>
       <Head>

@@ -1,6 +1,5 @@
 import type { AppProps } from 'next/app'
 import {ConfigProvider} from "antd"
-import  "@/styles/globals.scss"
 import UserProvider from '@/contexts/user'
 export default function App({ Component, pageProps }: AppProps) {
 

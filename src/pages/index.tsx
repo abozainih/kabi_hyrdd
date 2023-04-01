@@ -1,12 +1,15 @@
 import Head from 'next/head'
 import React from 'react'
-import { Layout } from "antd"
+import {Layout, Grid} from "antd"
 import Navbar from "@/components/Navbar"
 import styles from "@/styles/Home.module.scss"
 import LoginPage from '@/components/LoginPage'
 import { Usercontext } from '@/contexts/user'
 
+const {useBreakpoint} = Grid;
+
 export default function Home() {
+  const {lg, md, sm} = useBreakpoint();
   const {user} = React.useContext(Usercontext)
   return (
     <>
@@ -17,14 +20,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <Layout.Header>
+        <Layout.Header className={user? styles.px1 : !lg? !md? styles.px1 :styles.px2 :  styles.px10}>
           <Navbar />
         </Layout.Header>
-        <Layout.Content className={styles.main}>
+        <Layout.Content className={user? styles.px1 : `${styles.main} ${styles.pt5} ` +  (!lg? !md? styles.px1 :styles.px2 :  styles.px10)}>
           { user ?
            "hi" 
            :
-          
           <LoginPage />
           }
         </Layout.Content>

@@ -28,7 +28,7 @@ const LoginForm = ()=>{
     }
 
     const onFinishFeild = ()=>{
-        setDisabled(true)   
+        setDisabled(true) 
     }
     const validateMessages = {
         required: "${name} is required!",
@@ -39,7 +39,6 @@ const LoginForm = ()=>{
             <Typography.Link style={{color:token.colorPrimary}}  href="#API">Forgot your password?</Typography.Link>
         </div>
     );
-
     return (
         <Form
         form={form}
@@ -63,7 +62,7 @@ const LoginForm = ()=>{
                 name="email"
                 rules={[{ required: true, type:"email"}]}
             >
-                <Input type={"email"} placeholder="you@example.com"  suffix={ <ExclamationCircleOutlined />}/>
+                <Input type={"email"} placeholder="you@example.com"  suffix={ <ExclamationCircleOutlined className={form.getFieldError('email').length>0? styles.dFlex : styles.dNone} />}/>
             </Form.Item>
             <Form.Item
                 label={passwordLabel}
@@ -77,7 +76,7 @@ const LoginForm = ()=>{
                     type="password"
                     placeholder="Enter your password"
 
-                    suffix={ <ExclamationCircleOutlined />}
+                    suffix={ <ExclamationCircleOutlined className={form.getFieldError('password').length>0? styles.dFlex : styles.dNone} />}
                 />
             </Form.Item>
             <Form.Item className={styles.remember}>
@@ -91,7 +90,7 @@ const LoginForm = ()=>{
             </Form.Item>
 
             <Form.Item>
-                <Button disabled={disabled} block type="primary" htmlType="submit">
+                <Button style={disabled? {borderColor:"transparent"} : {}} disabled={disabled} block type="primary" htmlType="submit">
                     Sign in
                 </Button>
             </Form.Item>

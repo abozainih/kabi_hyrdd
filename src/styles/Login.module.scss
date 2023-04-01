@@ -1,14 +1,11 @@
+@import '_globals';
+
 .pheader{
-    padding:7em 50px 0 50px;
 
-    .mzero {
-        margin: 0 !important;
-      }
-
-    .flexColumn{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
+    // .flexColumn{
+    //     display: flex;
+    //     flex-direction: column;
+    //     align-items: flex-end;
         form {
             width:100%;
             .passwordLabel {
@@ -29,6 +26,6 @@
             }
         }
     }
-}
+// }
 
   

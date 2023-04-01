@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
         },
         Button:{
           colorBgContainerDisabled:"#F6F4FF",
-          colorBorder:"transparent"
+          // colorBorder:"transparent"
         }
       }
     }}>

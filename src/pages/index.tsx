@@ -9,7 +9,7 @@ import { Usercontext } from '@/contexts/user'
 const {useBreakpoint} = Grid;
 
 export default function Home() {
-  const {lg, md, sm} = useBreakpoint();
+  const {lg, md} = useBreakpoint();
   const {user} = React.useContext(Usercontext)
   return (
     <>

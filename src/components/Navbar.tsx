@@ -57,12 +57,13 @@ const Navbar = () => {
                             <Button type={"text"} shape={"circle"} size={"large"} icon={<BellOutlined />} />
                             <Button type={"text"} shape={"circle"} size={"large"} icon={<QuestionCircleOutlined />} />
                             <Dropdown
+                            
                              onOpenChange={(open)=> setOpen(open)}
                              placement={"bottomRight"}
                              arrow={{pointAtCenter:false}}
                              trigger={['click']}
                              menu={{items}}>
-                                <Space size={"small"}>
+                                <Space style={{cursor:"pointer"}} size={"small"}>
                                     {(lg||md) && <span>{`${user.firstName} ${user.lastName}`}</span>}
                                     <Avatar icon={<UserOutlined />} />
                                     {open ? <UpOutlined /> : <DownOutlined />}

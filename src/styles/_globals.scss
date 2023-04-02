@@ -1,3 +1,5 @@
+$textGray: #817B7B;
+
 @for $i from 0 through 15 {
     // Paddings
     .p#{$i}{
@@ -83,4 +85,19 @@
 
 .alignItemsCenter{
     align-items: center;
+}
+
+.border{
+    border:1px solid #FCFCFC !important;
+}
+
+.borderBottom{
+    border-bottom:2px solid #EBEBEB !important;
+}
+.borderRight{
+    border-right:2px solid #EBEBEB !important;
+}
+
+.borderRadius{
+    border-radius: 6px !important;
 }

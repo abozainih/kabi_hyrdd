@@ -1,12 +1,14 @@
 import {Button, Typography, Row, Col, Space, Dropdown, Avatar, Grid} from "antd"
 import type { MenuProps } from 'antd';
-import {BellOutlined, QuestionCircleOutlined, UserOutlined, DownOutlined, UpOutlined, LogoutOutlined} from  "@ant-design/icons"
+import {MenuOutlined, BellOutlined, QuestionCircleOutlined, UserOutlined, DownOutlined, UpOutlined, LogoutOutlined} from  "@ant-design/icons"
 import styles from "@/styles/Navbar.module.scss"
 import React from 'react';
 import { Usercontext } from "@/contexts/user";
+import { TogglerProps } from "@/types/toggler";
 
 const { useBreakpoint } = Grid;
-const Navbar = () => {
+
+const Navbar = ({setToggler}:TogglerProps) => {
 
     const { md, lg} = useBreakpoint();
     const [open, setOpen] = React.useState<boolean>(false);
@@ -44,7 +46,10 @@ const Navbar = () => {
         <nav className={styles.navbar}>
             <Row justify={"space-between"}>
                 <Col>
-                    <Typography.Text strong className={styles.title}>HYRDD</Typography.Text>
+                    <Space>
+                        {(!(lg) && user) && <MenuOutlined onClick={()=>setToggler(true)}  style={{fontSize:"20px"}} />}
+                        <Typography.Text strong className={styles.title}>HYRDD</Typography.Text>
+                    </Space>
                 </Col>
                 <Col>
                    <Space size={!(lg||md)? "small":"middle"}>

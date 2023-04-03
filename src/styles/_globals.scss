@@ -1,5 +1,7 @@
 $textGray: #817B7B;
-
+$colorSecoundry:#E6E4F9;
+$colorPrimary:#7B68F6;
+$backGroundSuccess:#EEF9EB;
 @for $i from 0 through 15 {
     // Paddings
     .p#{$i}{
@@ -45,10 +47,12 @@ $textGray: #817B7B;
             margin-bottom: #{$i}rem !important;
         }
         .mx#{$i}{
-            margin:0 #{$i}rem !important;
+            margin-left:#{$i}rem !important;
+            margin-right: #{$i}rem !important;
         }
         .my#{$i}{
-            margin:#{$i}rem 0 !important;
+            margin-top:#{$i}rem !important;
+            margin-bottom:#{$i}rem !important;
         }
 
 }
@@ -67,6 +71,9 @@ $textGray: #817B7B;
 
 .justifyContentCenter{
     justify-content: center;
+}
+.justifyContentBetween{
+    justify-content: space-between;
 }
 .justifyContentEnd{
     justify-content: flex-end;
@@ -100,4 +107,12 @@ $textGray: #817B7B;
 
 .borderRadius{
     border-radius: 6px !important;
+}
+
+.bgSuccess{
+    background-color: $backGroundSuccess;
+}
+
+.primaryColor{
+    color : $colorPrimary !important;
 }

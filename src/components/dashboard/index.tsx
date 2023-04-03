@@ -4,6 +4,9 @@ import {SearchOutlined, ReloadOutlined,FilterOutlined, MoreOutlined, DownloadOut
 import styles from "@/styles/dashboard.module.scss"
 import JobCard from "./card";
 import type { MenuProps } from 'antd';
+import data from  "@/data.json"
+import { cardPropsTypes } from "@/types/card";
+
 const {useBreakpoint} = Grid
 
 const Items: MenuProps["items"] = [
@@ -25,8 +28,32 @@ const Items: MenuProps["items"] = [
 ]
 const Dashboard = () => {
     const {xs,xl} = useBreakpoint()
+    function getData(
+    id:string,
+    jobTitle: string,
+    reqType: string,
+    reqStatus:boolean,
+    orgStructure : string,
+    Units : string[],
+    hiringManagers: string[],
+    vacanciesBudget:number,
+    vacanciesOpen:number,
+    vacanciesField:number):cardPropsTypes {
+        return     {
+            id,
+            jobTitle,
+            reqType,
+            reqStatus,
+            orgStructure,
+            Units,
+            hiringManagers,
+            vacanciesBudget,
+            vacanciesOpen,
+            vacanciesField
+        } as cardPropsTypes
+    }
     return (
-        <Row gutter={[0,10]} className={`${styles.mt1} ${styles.mx1}`}>
+        <Row  gutter={[0,10]} className={`${styles.my1} ${styles.mx1}`}>
             <Col span={24}>
                 <Row justify={"space-between"}>
                     <Col>
@@ -53,9 +80,24 @@ const Dashboard = () => {
                     </Col>
                 </Row>
             </Col>
-            <Col span={24}>
-                <JobCard/>
-            </Col>
+            {data.map(item=>{
+                return (
+                    <Col span={24}>
+                        <JobCard {...getData(
+                            item.id,
+                            item.jobTitle,
+                            item.reqType,
+                            item.reqStatus,
+                            item.orgStructure,
+                            item.Units,
+                            item.hiringManagers,
+                            item.vacanciesBudget,
+                            item.vacanciesOpen,
+                            item.vacanciesField
+                            )}/>
+                    </Col>
+                )
+            })}
         </Row>
     );
 }

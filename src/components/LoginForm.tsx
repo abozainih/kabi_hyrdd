@@ -50,6 +50,7 @@ const LoginForm = ()=>{
         onValuesChange={onValuesChange}
         onFinishFailed={onFinishFeild}
         onFinish={onFinish}
+        className={styles.form}
         >
             {
                 showAlert &&

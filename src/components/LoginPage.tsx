@@ -1,20 +1,24 @@
-import {Row, Col, Typography, theme} from 'antd';
+import {Row, Col, Typography, theme, Space, Grid} from 'antd';
 import styles from "@/styles/Login.module.scss"
 import Link from 'next/link';
 import LoginForm from "./LoginForm"
 import React from 'react';
 
+const {useBreakpoint} = Grid
 const LoginPage = () => {
+    const {xs,md,sm,xl} = useBreakpoint()
     const { token } = theme.useToken();
     return ( 
-        <Row gutter={[0,25]} className={styles.pheader}>
+        <Row gutter={[0,25]} justify={"space-between"}>
             <Col xl={16} lg={14} md={12} sm={24} xs={24}>
-                <Typography.Title  className={styles.m0} level={1}>Hi!</Typography.Title>
-                <Typography.Title className={styles.m0} level={1}>Welcome back to</Typography.Title>
-                <Typography.Title  className={styles.m0} style={{color:token.colorPrimary}} level={1}>HYRDD</Typography.Title>
-                <Typography.Text className={styles.m0}>if you dont have account, you can <Link href={"#"} style={{color:token.colorPrimary}}>Register here!</Link></Typography.Text>
+                <Space size={"small"} className={((xs||md||sm) && !xl ?styles.w100:styles.w60) +` ${styles.leadingText} ${styles.py1}`} direction={"vertical"}>
+                    <Typography.Title  className={styles.m0} level={1}>Hi!</Typography.Title>
+                    <Typography.Title className={styles.m0} level={1}>Welcome back to</Typography.Title>
+                    <Typography.Title  className={styles.m0} style={{color:token.colorPrimary}} level={1}>HYRDD</Typography.Title>
+                    <Typography.Paragraph className={styles.mt1}>if you dont have account, you can <Link href={"#"} style={{color:token.colorPrimary}}>Register here!</Link></Typography.Paragraph>
+                </Space>
             </Col>
-            <Col xl={8} lg={10} md={12} sm={24} xs={24} className={`${styles.dFlex} ${styles.flexDC} ${styles.alginItemsEnd}`}>
+            <Col xl={6} lg={8} md={10} sm={24} xs={24} className={`${styles.dFlex} ${styles.flexDC} ${styles.alginItemsEnd}`}>
                 <LoginForm/>
             </Col>
         </Row>

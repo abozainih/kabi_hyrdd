@@ -11,26 +11,25 @@ const Sidebar = ({toggler, setToggler}:TogglerProps) => {
     const [colapsed, setColapsed] = React.useState<boolean>(false)
     const [itemKey, setItemKey] = React.useState<string>("jobs")
     const {Items, itemsWithChilds} = React.useContext(ItemsContext)
-    const {lg} = useBreakpoint();
+    const {lg,xl} = useBreakpoint();
     const icon = colapsed? <Button size={"middle"} onClick={()=>setColapsed(false)} shape={"circle"} icon={<RightOutlined/>} />
                            :<Button size={"middle"}  onClick={()=>setColapsed(true)} shape={"circle"} icon={<LeftOutlined/>} />
     function onSelectItem({key}:{key:string}){
         setItemKey(key)
     }
-
     return ( 
-        <Row>
+        <Row gutter={[10,0]}>
             { (lg)?
             <>
             
                 <Col>
-                    <Badge offset={[-10,38]} count={icon}>
-                        <Layout.Sider collapsed={colapsed} theme="light">
-                            <Menu style={{ minHeight: 'calc(100vh - 70px)' }} onSelect={onSelectItem} defaultSelectedKeys={["jobs"]} className={`${styles.pt1} ${styles.borderRight}`} items={Items}></Menu>
+                    <Badge className={styles.h100} offset={[-10,38]} count={icon}>
+                        <Layout.Sider collapsible className={`${styles.h100} ${styles.borderRight}`} collapsed={colapsed} theme="light">
+                            <Menu style={{ minHeight: 'calc(100vh - 70px)' }} onSelect={onSelectItem} defaultSelectedKeys={["jobs"]} className={`${styles.pt1}`} items={Items}></Menu>
                         </Layout.Sider>
                     </Badge>
                 </Col>
-                <Col>
+                <Col  className={`${styles.mt1}`}>
                     <Nextsidebar itemKey={itemKey} />
                 </Col>
             </>

@@ -3,6 +3,7 @@ import styles from "@/styles/Card.module.scss"
 import { Card, Button, Space, Row, Col, Typography, Divider, Grid, Dropdown } from 'antd';
 import {MoreOutlined, DeleteOutlined, EditFilled, DiffOutlined} from "@ant-design/icons"
 import type { MenuProps } from 'antd';
+import { cardPropsTypes } from '@/types/card';
 
 const {useBreakpoint} = Grid
 
@@ -19,7 +20,20 @@ const DropdownItem: MenuProps["items"] = [
         danger:true
     },
 ]
-const JobCard = () => {
+const JobCard = (
+    {
+        id,
+        jobTitle,
+        reqType,
+        reqStatus,
+        orgStructure,
+        Units,
+        hiringManagers,
+        vacanciesBudget,
+        vacanciesOpen,
+        vacanciesField
+    } : cardPropsTypes
+) => {
     const {md,xl,xs} = useBreakpoint()
     const extras = (xs?
                     <Dropdown menu={{ items:DropdownItem }} placement={"bottomRight"} trigger={['click']} arrow={{ pointAtCenter: true }}>

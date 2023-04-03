@@ -25,7 +25,7 @@ $backGroundSuccess:#EEF9EB;
         padding-right: #{$i}rem !important;
     }
 
-    .py-#{$i}{
+    .py#{$i}{
         padding-top:#{$i}rem  !important;
         padding-bottom:#{$i}rem  !important;
     }
@@ -115,4 +115,18 @@ $backGroundSuccess:#EEF9EB;
 
 .primaryColor{
     color : $colorPrimary !important;
+}
+
+.boxShadow{
+    box-shadow: 7px 8px 7px -3px rgba(203,203,203,0.5);
+}
+.w100{
+    width:100%
+}
+.h100{
+    height: 100%;
+}
+
+.w60{
+    width:60%;
 }

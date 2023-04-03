@@ -1,7 +1,6 @@
 import React from "react"
 import {Layout, Menu} from "antd"
 import styles from "@/styles/Sidebar.module.scss"
-import type { MenuProps } from 'antd';
 import { ItemsContext } from "@/contexts/sidebarItems";
 type NextsidebarProps={
     itemKey:string|"dashboard"

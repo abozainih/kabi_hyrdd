@@ -9,7 +9,7 @@ import { TogglerProps } from "@/types/toggler";
 const {useBreakpoint} = Grid
 const Sidebar = ({toggler, setToggler}:TogglerProps) => {
     const [colapsed, setColapsed] = React.useState<boolean>(false)
-    const [itemKey, setItemKey] = React.useState<string>("dashboard")
+    const [itemKey, setItemKey] = React.useState<string>("jobs")
     const {Items, itemsWithChilds} = React.useContext(ItemsContext)
     const {lg} = useBreakpoint();
     const icon = colapsed? <Button size={"middle"} onClick={()=>setColapsed(false)} shape={"circle"} icon={<RightOutlined/>} />

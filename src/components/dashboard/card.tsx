@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styles from "@/styles/Card.module.scss"
 import { Card, Button, Space, Row, Col, Typography, Divider, Grid, Dropdown } from 'antd';
-import {MoreOutlined, DeleteOutlined, EditFilled} from "@ant-design/icons"
+import {MoreOutlined, DeleteOutlined, EditFilled, DiffOutlined} from "@ant-design/icons"
 import type { MenuProps } from 'antd';
 
 const {useBreakpoint} = Grid
@@ -9,17 +9,15 @@ const {useBreakpoint} = Grid
 const DropdownItem: MenuProps["items"] = [
     {
         key:"1",
-        label:(
-            <Space size={39}>
-                    <Button icon={<MoreOutlined />}/>
-                    <Button danger icon={<DeleteOutlined />}/>
-            </Space>
-        ),
+        label: "Request Job",
+        icon:<DiffOutlined />
     },
     {
         key:"2",
-        label:<Button type={"primary"}>Request Job</Button>,
-    }
+        label:"Delete item",
+        icon:<DeleteOutlined/>,
+        danger:true
+    },
 ]
 const JobCard = () => {
     const {md,xl,xs} = useBreakpoint()

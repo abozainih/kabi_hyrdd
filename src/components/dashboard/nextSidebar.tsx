@@ -10,7 +10,7 @@ const Nextsidebar = ({itemKey} : NextsidebarProps) => {
     const {subItems} = React.useContext(ItemsContext)
     return ( 
         <Layout.Sider className={styles.subsidebar}  theme="light">
-            <Menu items={subItems[itemKey]}></Menu>
+            <Menu defaultSelectedKeys={["jobs1"]} items={subItems[itemKey]}></Menu>
         </Layout.Sider>
      );
 }

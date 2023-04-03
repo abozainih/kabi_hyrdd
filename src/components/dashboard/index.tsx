@@ -1,4 +1,4 @@
-import Sidebar from "./sidebar";
+import * as React from 'react';
 import {Row, Col, Space, Input, Button, Grid,Dropdown} from "antd";
 import {SearchOutlined, ReloadOutlined,FilterOutlined, MoreOutlined, DownloadOutlined, UploadOutlined, PlusCircleFilled} from "@ant-design/icons"
 import styles from "@/styles/dashboard.module.scss"
@@ -6,6 +6,7 @@ import JobCard from "./card";
 import type { MenuProps } from 'antd';
 import data from  "@/data.json"
 import { cardPropsTypes } from "@/types/card";
+import CreateForm from './createForm';
 
 const {useBreakpoint} = Grid
 
@@ -21,12 +22,12 @@ const Items: MenuProps["items"] = [
         icon:<UploadOutlined/>
     },
     {
-        label:"Add new Job",
+        label:<CreateForm/>,
         key:"3",
-        icon:<PlusCircleFilled/>
     }
 ]
 const Dashboard = () => {
+    const [dataCard,setDataCard] = React.useState(data);
     const {xs,xl} = useBreakpoint()
     function getData(
     id:string,
@@ -51,6 +52,7 @@ const Dashboard = () => {
             vacanciesOpen,
             vacanciesField
         } as cardPropsTypes
+        
     }
     return (
         <Row  gutter={[0,10]} className={`${styles.my1} ${styles.mx1}`}>
@@ -74,13 +76,13 @@ const Dashboard = () => {
                             <Space>
                                 <Button size={"large"} className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter} ${styles.secoundryButton}`} icon={<DownloadOutlined style={{fontSize:"10px"}} />}>{xl?"Download Template":""}</Button>
                                 <Button size={"large"} className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter} ${styles.secoundryButton}`} icon={<UploadOutlined style={{fontSize:"10px"}} />}>{xl?"Import Jobs":""}</Button>
-                                <Button size={"large"} type="primary"  className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter}`} icon={<PlusCircleFilled />}>{xl?"Add new Job":""}</Button>
+                                <CreateForm setDataCard={setDataCard}/>
                             </Space> 
                     }
                     </Col>
                 </Row>
             </Col>
-            {data.map(item=>{
+            {dataCard.map(item=>{
                 return (
                     <Col span={24}>
                         <JobCard {...getData(

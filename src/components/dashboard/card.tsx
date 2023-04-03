@@ -49,26 +49,26 @@ const JobCard = (
 
 
     return ( 
-        <Card title={<><span style={{fontWeight:"normal"}}>#1:</span> Job Title</> } extra={extras}>
+        <Card title={<><span style={{fontWeight:"normal"}}>#{id}:</span> {jobTitle}</> } extra={extras}>
             <Row>
                 <Col md={24} xl={8}>
                         <Row gutter={[0,((!xl && md)|| xs)?15:10]}>
                             <Col xs={24} md={8} xl={24}>
                                 <Space size={0} direction={"vertical"}>
                                     <Typography.Text strong>Requsutuin Type</Typography.Text>
-                                    <Typography.Text>new Vacancy</Typography.Text>
+                                    <Typography.Text>{reqType}</Typography.Text>
                                 </Space>
                             </Col>
                             <Col xs={24} md={8} xl={24}>
                             <Space size={0} direction={"vertical"}>
                                     <Typography.Text strong className={styles.primaryColor}>Organization Structure</Typography.Text>
-                                    <Typography.Text>Sadeq org</Typography.Text>
+                                    <Typography.Text>{orgStructure}</Typography.Text>
                                 </Space>
                             </Col>
                             <Col xs={24} md={8} xl={24}>
                             <Space size={0} direction={"vertical"}>
                                     <Typography.Text strong>Units</Typography.Text>
-                                    <Typography.Text>unit 1, unit  2</Typography.Text>
+                                    <Typography.Text>{Units?.toString()}</Typography.Text>
                                 </Space>
                             </Col>
                             {xl && <Divider className={styles.my1} />} 
@@ -76,8 +76,12 @@ const JobCard = (
                                 <Space direction={"vertical"}>
                                     <Typography.Text strong>Hiring manager</Typography.Text>
                                     <Space>
-                                        <Typography.Text className={`${styles.bgSuccess} ${styles.hiringManagers}`} >Hiring manager</Typography.Text>
-                                        <Typography.Text className={`${styles.bgSuccess} ${styles.hiringManagers}`} >Hiring manager</Typography.Text>
+                                        {hiringManagers.map(item=>{
+                                            return(
+
+                                                <Typography.Text className={`${styles.bgSuccess} ${styles.hiringManagers}`} >{item}</Typography.Text>
+                                            )
+                                        })}
                                     </Space>
                                 </Space>
                             </Col>
@@ -89,7 +93,7 @@ const JobCard = (
                         <Col style={{textAlign:((!xl && md)|| xs)?"start":"end"}} span={24}>
                             <Space size={0} direction={"vertical"}>
                                 <Typography.Text>Current Requisition Status</Typography.Text>
-                                <Typography.Text type={"danger"}>Not Requested</Typography.Text>
+                                <Typography.Text type={reqStatus? "success":"danger"}>{reqStatus? "Requested":"Not Requested"}</Typography.Text>
                                 <Typography.Link>View Details</Typography.Link>
                             </Space>
                         </Col>
@@ -97,20 +101,20 @@ const JobCard = (
                             <Row justify={((!xl && md)|| xs)?"start":"end"} gutter={[0,25]}>
                                 <Col xs={24} md={7} lg={8} xl={7}>
                                     <Card bordered={false} style={{height:"100%"}} size={"small"} className={styles.card}>
-                                        <Typography.Text strong>1</Typography.Text>
+                                        <Typography.Text strong>{vacanciesBudget}</Typography.Text>
                                         <Typography.Paragraph>Total Budgeted Vacancies</Typography.Paragraph>
                             
                                     </Card>
                                 </Col>
                                 <Col xs={24} md={7} lg={8} xl={7}>
                                     <Card bordered={false} style={{height:"100%"}} size={"small"} className={styles.card}>
-                                        <Typography.Text type={"success"} strong>1</Typography.Text>
+                                        <Typography.Text type={"success"} strong>{vacanciesOpen}</Typography.Text>
                                         <Typography.Paragraph>Vacancies still open</Typography.Paragraph>
                                     </Card>
                                 </Col>
                                 <Col xs={24} md={7} lg={8} xl={7}>
                                     <Card bordered={false} style={{height:"100%"}} size={"small"} className={styles.card}>
-                                    <Typography.Text type={"danger"} strong>0</Typography.Text>
+                                    <Typography.Text type={"danger"} strong>{vacanciesField}</Typography.Text>
                                     <Typography.Paragraph>Vacancies Field</Typography.Paragraph>
                                         
                                     </Card>

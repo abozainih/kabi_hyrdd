@@ -24,7 +24,7 @@ const Sidebar = ({toggler, setToggler}:TogglerProps) => {
             
                 <Col>
                     <Badge className={styles.h100} offset={[-10,38]} count={icon}>
-                        <Layout.Sider collapsible className={`${styles.h100} ${styles.borderRight}`} collapsed={colapsed} theme="light">
+                        <Layout.Sider className={`${styles.h100} ${styles.borderRight}`} collapsed={colapsed} theme="light">
                             <Menu style={{ minHeight: 'calc(100vh - 70px)' }} onSelect={onSelectItem} defaultSelectedKeys={["jobs"]} className={`${styles.pt1}`} items={Items}></Menu>
                         </Layout.Sider>
                     </Badge>

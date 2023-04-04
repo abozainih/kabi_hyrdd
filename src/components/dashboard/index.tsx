@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Row, Col, Space, Input, Button, Grid,Dropdown} from "antd";
+import {Row, Col, Space, Input, Button, Grid,Dropdown, AutoComplete} from "antd";
 import {SearchOutlined, ReloadOutlined,FilterOutlined, MoreOutlined, DownloadOutlined, UploadOutlined, PlusCircleFilled} from "@ant-design/icons"
 import styles from "@/styles/dashboard.module.scss"
 import JobCard from "./card";
@@ -13,6 +13,8 @@ const {useBreakpoint} = Grid
 const Dashboard = () => {
     const [open, setOpen] = React.useState(false);
     const [dataCard,setDataCard] = React.useState(data);
+    const [options, setOptions] = React.useState<{}[]>();
+    const [searchValue, setSearchValue] = React.useState<string>()
     const {xs,xl} = useBreakpoint()
     const Items: MenuProps["items"] = [
         {
@@ -58,6 +60,36 @@ const Dashboard = () => {
         } as cardPropsTypes
         
     }
+
+    const onSearch=(value:string)=>{
+        const opt = dataCard.filter(item=>{
+            return item.jobTitle.toLowerCase().includes(value.toLowerCase())
+        }).reduce((arr,item)=>{
+            if(!arr.some(ar=>ar.label == item.jobTitle)){
+                arr.push({label:item.jobTitle,value:item.jobTitle})
+            }
+            return arr
+        },[{label:"",value:""}]).filter(item=>item.label !="")
+        setOptions(opt)
+    }
+    const onSelectItem = (value:string)=>{
+        setSearchValue(value)
+    }
+
+    const filterData =()=>{
+        const newData = dataCard.filter(item=>{
+            return item.jobTitle == searchValue
+        })
+        setDataCard(newData)
+    }
+
+    const resetData=()=>{
+        setDataCard(data)
+        setSearchValue("")
+    }
+    const setValue=(value:string)=>{
+        setSearchValue(value)
+    }
     return (
         <>
             <CreateForm setOpen={setOpen} open={open} setDataCard={setDataCard}/>
@@ -66,9 +98,9 @@ const Dashboard = () => {
                     <Row justify={"space-between"}>
                         <Col>
                             <Space>
-                                <Input size={xs?"middle":"large"} placeholder="Search" />
-                                <Button size={xs?"middle":"large"} className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter}`}  type="primary" icon={<SearchOutlined style={{fontSize:"10px"}} />} />
-                                <Button size={xs?"middle":"large"} className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter} ${styles.secoundryButton}`} icon={<ReloadOutlined style={{fontSize:"10px"}} />} />
+                                <AutoComplete onChange={setValue} allowClear value={searchValue} onSearch={onSearch} onSelect={onSelectItem} options={options} filterOption={true} style={{ width: 200 }} size={xs?"middle":"large"} placeholder="Search" />
+                                <Button onClick={filterData} size={xs?"middle":"large"} className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter}`}  type="primary" icon={<SearchOutlined style={{fontSize:"10px"}} />} />
+                                <Button onClick={resetData} size={xs?"middle":"large"} className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter} ${styles.secoundryButton}`} icon={<ReloadOutlined style={{fontSize:"10px"}} />} />
                                 <Button size={xs?"middle":"large"} className={(xs?` `:`${styles.ml1} `)+ `${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter} ${styles.secoundryButton} `} icon={<FilterOutlined />}>{xl?<span>Fillter</span>:""}</Button>
                             </Space>
                         </Col>

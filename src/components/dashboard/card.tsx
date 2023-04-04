@@ -4,22 +4,10 @@ import { Card, Button, Space, Row, Col, Typography, Divider, Grid, Dropdown } fr
 import {MoreOutlined, DeleteOutlined, EditFilled, DiffOutlined} from "@ant-design/icons"
 import type { MenuProps } from 'antd';
 import { cardPropsTypes } from '@/types/card';
+import DeleteModal from './deleteModal';
 
 const {useBreakpoint} = Grid
 
-const DropdownItem: MenuProps["items"] = [
-    {
-        key:"1",
-        label: "Request Job",
-        icon:<DiffOutlined />
-    },
-    {
-        key:"2",
-        label:"Delete item",
-        icon:<DeleteOutlined/>,
-        danger:true
-    },
-]
 const JobCard = (
     {
         id,
@@ -31,12 +19,29 @@ const JobCard = (
         hiringManagers,
         vacanciesBudget,
         vacanciesOpen,
-        vacanciesField
+        vacanciesField,
+        deleteItem
     } : cardPropsTypes
-) => {
+    ) => {
+
     const {md,xl,xs} = useBreakpoint()
+    const [open,setOpen] = React.useState<boolean>(false);
+    const DropdownItem: MenuProps["items"] = [
+        {
+            key:"1",
+            label: "Request Job",
+            icon:<DiffOutlined />
+        },
+        {
+            key:"2",
+            label:"Delete item",
+            icon:<DeleteOutlined/>,
+            danger:true,
+            onClick:()=>setOpen(true)
+        },
+    ]
     const extras = (xs?
-                    <Dropdown menu={{ items:DropdownItem }} placement={"bottomRight"} trigger={['click']} arrow={{ pointAtCenter: true }}>
+        <Dropdown menu={{ items:DropdownItem }} placement={"bottomRight"} trigger={['click']} arrow={{ pointAtCenter: true }}>
                         <Button icon={<MoreOutlined />}/>
                     </Dropdown>
                     :
@@ -44,11 +49,12 @@ const JobCard = (
                         <Button type={"primary"}>Request Job</Button>
                         <Button icon={<MoreOutlined />}/>
                         <Button icon={<EditFilled />}/>
-                        <Button danger icon={<DeleteOutlined />}/>
+                        <Button onClick={()=>setOpen(true)} danger icon={<DeleteOutlined />}/>
                     </Space>)
 
-
     return ( 
+        <>
+        <DeleteModal id={id} deleteItem={deleteItem} open={open} setOpen={setOpen}/>
         <Card title={<><span style={{fontWeight:"normal"}}>#{id}:</span> {jobTitle}</> } extra={extras}>
             <Row>
                 <Col md={24} xl={8}>
@@ -125,6 +131,7 @@ const JobCard = (
                 </Col>
             </Row>
         </Card>
+        </>
      );
 }
  

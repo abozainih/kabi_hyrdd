@@ -45,7 +45,9 @@ const Dashboard = () => {
     hiringManagers: string[],
     vacanciesBudget:number,
     vacanciesOpen:number,
-    vacanciesField:number):cardPropsTypes {
+    vacanciesField:number,
+    deleteItem:(id:string)=>void
+    ):cardPropsTypes {
         return     {
             id,
             jobTitle,
@@ -56,11 +58,18 @@ const Dashboard = () => {
             hiringManagers,
             vacanciesBudget,
             vacanciesOpen,
-            vacanciesField
+            vacanciesField,
+            deleteItem
         } as cardPropsTypes
         
     }
 
+    const deleteItem =(id:string)=>{
+        const newData = dataCard.filter(item=>{
+            return item.id != id
+        })
+        setDataCard(newData)
+    }
     const onSearch=(value:string)=>{
         const opt = dataCard.filter(item=>{
             return item.jobTitle.toLowerCase().includes(value.toLowerCase())
@@ -133,7 +142,8 @@ const Dashboard = () => {
                                 item.hiringManagers,
                                 item.vacanciesBudget,
                                 item.vacanciesOpen,
-                                item.vacanciesField
+                                item.vacanciesField,
+                                deleteItem
                                 )}/>
                         </Col>
                     )

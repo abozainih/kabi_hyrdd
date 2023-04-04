@@ -8,5 +8,6 @@ export type cardPropsTypes ={
     "hiringManagers": string[],
     "vacanciesBudget":number,
     "vacanciesOpen":number,
-    "vacanciesField":number
+    "vacanciesField":number,
+    deleteItem:(id:string)=>void
 }

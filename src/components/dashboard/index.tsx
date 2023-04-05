@@ -7,6 +7,7 @@ import type { MenuProps } from 'antd';
 import data from  "@/data.json"
 import { cardPropsTypes } from "@/types/card";
 import CreateForm from './createForm';
+import { LangContext } from '@/contexts/lang';
 
 const {useBreakpoint} = Grid
 
@@ -14,6 +15,7 @@ const Dashboard = () => {
     const [open, setOpen] = React.useState(false);
     const [dataCard,setDataCard] = React.useState(data);
     const [options, setOptions] = React.useState<{}[]>();
+    const {t} = React.useContext(LangContext)
     const [searchValue, setSearchValue] = React.useState<string>()
     const {xs,xl} = useBreakpoint()
     const Items: MenuProps["items"] = [
@@ -110,7 +112,7 @@ const Dashboard = () => {
                                 <AutoComplete onChange={setValue} allowClear value={searchValue} onSearch={onSearch} onSelect={onSelectItem} options={options} filterOption={true} style={{ width: 200 }} size={xs?"middle":"large"} placeholder="Search" />
                                 <Button onClick={filterData} size={xs?"middle":"large"} className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter}`}  type="primary" icon={<SearchOutlined style={{fontSize:"10px"}} />} />
                                 <Button onClick={resetData} size={xs?"middle":"large"} className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter} ${styles.secoundryButton}`} icon={<ReloadOutlined style={{fontSize:"10px"}} />} />
-                                <Button size={xs?"middle":"large"} className={(xs?` `:`${styles.ml1} `)+ `${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter} ${styles.secoundryButton} `} icon={<FilterOutlined />}>{xl?<span>Fillter</span>:""}</Button>
+                                <Button size={xs?"middle":"large"} className={(xs?` `:`${styles.ml1} `)+ `${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter} ${styles.secoundryButton} `} icon={<FilterOutlined />}>{xl?<span>{t("dashboard:filter")}</span>:""}</Button>
                             </Space>
                         </Col>
                         <Col>
@@ -121,9 +123,9 @@ const Dashboard = () => {
                                 </Dropdown>
                             :
                                 <Space>
-                                    <Button size={"large"} className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter} ${styles.secoundryButton}`} icon={<DownloadOutlined style={{fontSize:"10px"}} />}>{xl?"Download Template":""}</Button>
-                                    <Button size={"large"} className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter} ${styles.secoundryButton}`} icon={<UploadOutlined style={{fontSize:"10px"}} />}>{xl?"Import Jobs":""}</Button>
-                                    <Button  size={"large"} onClick={()=>setOpen(true)} type="primary"  className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter}`} icon={<PlusCircleFilled />}>{xl?"Add new Job":""}</Button>
+                                    <Button size={"large"} className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter} ${styles.secoundryButton}`} icon={<DownloadOutlined style={{fontSize:"10px"}} />}>{xl?t("dashboard:downloadtemp"):""}</Button>
+                                    <Button size={"large"} className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter} ${styles.secoundryButton}`} icon={<UploadOutlined style={{fontSize:"10px"}} />}>{xl?t("dashboard:importjob"):""}</Button>
+                                    <Button  size={"large"} onClick={()=>setOpen(true)} type="primary"  className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter}`} icon={<PlusCircleFilled />}>{xl?t("dashboard:addjob"):""}</Button>
                                 </Space> 
                         }
                         </Col>

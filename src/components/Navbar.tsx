@@ -5,11 +5,18 @@ import styles from "@/styles/Navbar.module.scss"
 import React from 'react';
 import { Usercontext } from "@/contexts/user";
 import { TogglerProps } from "@/types/toggler";
+import { LangContext } from "@/contexts/lang";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { DirContext } from "@/contexts/direction";
 
 const { useBreakpoint } = Grid;
 
 const Navbar = ({setToggler}:TogglerProps) => {
 
+    const langData = React.useContext(LangContext)
+    const {dir,setDir} = React.useContext(DirContext)
+    const router = useRouter()
     const { md, lg} = useBreakpoint();
     const [open, setOpen] = React.useState<boolean>(false);
     const {user, setUser} = React.useContext(Usercontext);
@@ -30,7 +37,7 @@ const Navbar = ({setToggler}:TogglerProps) => {
             type: 'divider',
           },
           {
-            label: 'Sign out',
+            label: langData.t("navbar:signout"),
             icon: <LogoutOutlined />,
             danger:true,
             key: '3',
@@ -53,9 +60,11 @@ const Navbar = ({setToggler}:TogglerProps) => {
                 </Col>
                 <Col>
                    <Space size={!(lg||md)? "small":"middle"}>
-                        <Button >
-                            <Typography.Text strong>العربية</Typography.Text>
-                        </Button>
+                        <Link href={router.asPath} locale={langData.i18n.language == "en"? "ar":"en"}>
+                            <Button onClick={()=>setDir(prevDir=>prevDir=="rtl"? "ltr":"rtl")}>
+                                {langData.i18n.language == "ar"? "English": "العربية"}
+                            </Button>
+                        </Link>
                     {
                         user && 
                         <>

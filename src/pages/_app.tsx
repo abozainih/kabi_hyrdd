@@ -1,27 +1,22 @@
 import type { AppProps } from 'next/app'
-import {ConfigProvider} from "antd"
+import * as React from 'react';
 import UserProvider from '@/contexts/user'
 import "@/styles/globals.scss"
-export default function App({ Component, pageProps }: AppProps) {
+import { appWithTranslation } from 'next-i18next'
+import LangProvider, { LangContext } from '@/contexts/lang'
+import DirProvider from '@/contexts/direction';
+function App({ Component, pageProps }: AppProps) {
 
+  const {i18n} = React.useContext(LangContext)
   return(
-    <ConfigProvider theme={{
-      token:{
-          colorPrimary:"#7B68F6",
-      },
-      components:{
-        Layout:{
-          colorBgHeader:"#fff"
-        },
-        Button:{
-          colorBgContainerDisabled:"#F6F4FF",
-          // colorBorder:"transparent"
-        }
-      }
-    }}>
-      <UserProvider>
-        <Component {...pageProps} />
-      </UserProvider>
-    </ConfigProvider>
+    <DirProvider>
+        <UserProvider>
+          <LangProvider>
+            <Component {...pageProps} />
+          </LangProvider>
+        </UserProvider>
+    </DirProvider>
     )
   }
+
+export default appWithTranslation(App)

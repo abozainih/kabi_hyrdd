@@ -5,6 +5,7 @@ import {MoreOutlined, DeleteOutlined, EditFilled, DiffOutlined} from "@ant-desig
 import type { MenuProps } from 'antd';
 import { cardPropsTypes } from '@/types/card';
 import DeleteModal from './deleteModal';
+import { LangContext } from '@/contexts/lang';
 
 const {useBreakpoint} = Grid
 
@@ -26,15 +27,16 @@ const JobCard = (
 
     const {md,xl,xs} = useBreakpoint()
     const [open,setOpen] = React.useState<boolean>(false);
+    const {t} = React.useContext(LangContext)
     const DropdownItem: MenuProps["items"] = [
         {
             key:"1",
-            label: "Request Job",
+            label: t("card:reqjob"),
             icon:<DiffOutlined />
         },
         {
             key:"2",
-            label:"Delete item",
+            label:t("card:deleteitem"),
             icon:<DeleteOutlined/>,
             danger:true,
             onClick:()=>setOpen(true)
@@ -46,7 +48,7 @@ const JobCard = (
                     </Dropdown>
                     :
                     <Space>
-                        <Button type={"primary"}>Request Job</Button>
+                        <Button type={"primary"}>{t("card:reqjob")}</Button>
                         <Button icon={<MoreOutlined />}/>
                         <Button icon={<EditFilled />}/>
                         <Button onClick={()=>setOpen(true)} danger icon={<DeleteOutlined />}/>
@@ -61,26 +63,26 @@ const JobCard = (
                         <Row gutter={[0,((!xl && md)|| xs)?15:10]}>
                             <Col xs={24} md={8} xl={24}>
                                 <Space size={0} direction={"vertical"}>
-                                    <Typography.Text strong>Requsutuin Type</Typography.Text>
+                                    <Typography.Text strong>{t("card:reqtype")}</Typography.Text>
                                     <Typography.Text>{reqType}</Typography.Text>
                                 </Space>
                             </Col>
                             <Col xs={24} md={8} xl={24}>
                             <Space size={0} direction={"vertical"}>
-                                    <Typography.Text strong className={styles.primaryColor}>Organization Structure</Typography.Text>
+                                    <Typography.Text strong className={styles.primaryColor}>{t("card:ordstrucure")}</Typography.Text>
                                     <Typography.Text>{orgStructure}</Typography.Text>
                                 </Space>
                             </Col>
                             <Col xs={24} md={8} xl={24}>
                             <Space size={0} direction={"vertical"}>
-                                    <Typography.Text strong>Units</Typography.Text>
+                                    <Typography.Text strong>{t("card:units")}</Typography.Text>
                                     <Typography.Text>{Units?.toString()}</Typography.Text>
                                 </Space>
                             </Col>
                             {xl && <Divider className={styles.my1} />} 
                             <Col span={24}>
                                 <Space direction={"vertical"}>
-                                    <Typography.Text strong>Hiring manager</Typography.Text>
+                                    <Typography.Text strong>{t("card:hiringmanager")}</Typography.Text>
                                     <Space>
                                         {hiringManagers.map(item=>{
                                             return(
@@ -98,8 +100,8 @@ const JobCard = (
                     <Row gutter={[0,25]}>
                         <Col style={{textAlign:((!xl && md)|| xs)?"start":"end"}} span={24}>
                             <Space size={0} direction={"vertical"}>
-                                <Typography.Text>Current Requisition Status</Typography.Text>
-                                <Typography.Text type={reqStatus? "success":"danger"}>{reqStatus? "Requested":"Not Requested"}</Typography.Text>
+                                <Typography.Text>{t("card:currentreqstatus")}</Typography.Text>
+                                <Typography.Text type={reqStatus? "success":"danger"}>{reqStatus? t("card:requested"):t("card:")}</Typography.Text>
                                 <Typography.Link>View Details</Typography.Link>
                             </Space>
                         </Col>

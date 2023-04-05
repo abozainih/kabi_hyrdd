@@ -1,11 +1,12 @@
 import Head from 'next/head'
 import React from 'react'
-import {Layout, Grid} from "antd"
+import {Layout, Grid, ConfigProvider} from "antd"
 import Navbar from "@/components/Navbar"
 import styles from "@/styles/Home.module.scss"
 import { Usercontext } from '@/contexts/user'
 import Sidebar from './dashboard/sidebar'
 import ItemsProvider from '@/contexts/sidebarItems'
+import { DirContext } from '@/contexts/direction'
 
 type BaseLayoutProp ={
     title:string,
@@ -17,8 +18,23 @@ const BaseLayout = ({title,PageComponent}:BaseLayoutProp) => {
     const [toggler, setToggler] = React.useState(false);
     const {lg, md} = useBreakpoint();
     const {user} = React.useContext(Usercontext)
+    const {dir} = React.useContext(DirContext)
+
     return (
-      <>
+      <ConfigProvider direction={dir}  theme={{
+        token:{
+            colorPrimary:"#7B68F6",
+        },
+        components:{
+          Layout:{
+            colorBgHeader:"#fff"
+          },
+          Button:{
+            colorBgContainerDisabled:"#F6F4FF",
+            // colorBorder:"transparent"
+          }
+        }
+      }}>
         <Head>
           <title>HYRDD-{title}</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -38,7 +54,7 @@ const BaseLayout = ({title,PageComponent}:BaseLayoutProp) => {
             </Layout.Content>
           </Layout>
         </Layout>
-      </>
+      </ConfigProvider>
     )
 }
 export default BaseLayout;

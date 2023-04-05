@@ -5,9 +5,11 @@ import React from 'react';
 import data from  "../userData.json"
 import Link from 'next/link';
 import { Usercontext } from '@/contexts/user';
+import { LangContext } from '@/contexts/lang';
 
 const LoginForm = ()=>{
     const { token } = theme.useToken();
+    const langData = React.useContext(LangContext)
     const [disabled, setDisabled] = React.useState<boolean>(false)
     const [form] = Form.useForm()
     const [showAlert,setShowAlert] = React.useState<boolean>(false)
@@ -35,8 +37,8 @@ const LoginForm = ()=>{
       }
     const passwordLabel = (
         <div>
-            <span>Password</span>
-            <Typography.Link style={{color:token.colorPrimary}}  href="#API">Forgot your password?</Typography.Link>
+            <span>{langData.t("login:password")}</span>
+            <Typography.Link style={{color:token.colorPrimary}}  href="#API">{langData.t("login:forgotpassword")}</Typography.Link>
         </div>
     );
     return (
@@ -59,7 +61,7 @@ const LoginForm = ()=>{
                 </Form.Item>
             }
             <Form.Item
-                label="Email"
+                label={langData.t("login:email")}
                 name="email"
                 rules={[{ required: true, type:"email"}]}
             >
@@ -82,17 +84,17 @@ const LoginForm = ()=>{
             </Form.Item>
             <Form.Item className={styles.remember}>
                 <Form.Item name="remember" valuePropName="checked" noStyle>
-                    <Checkbox>Remember me</Checkbox>
+                    <Checkbox>{langData.t("login:remmberme")}</Checkbox>
                 </Form.Item>
 
                 <Link href="#" style={{color:token.colorPrimary}}>
-                    Reset Multi-Factor code?
+                    {langData.t("login:resetmulti")}
                 </Link>
             </Form.Item>
 
             <Form.Item>
                 <Button style={disabled? {borderColor:"transparent"} : {}} disabled={disabled} block type="primary" htmlType="submit">
-                    Sign in
+                    {langData.t("login:signin")}
                 </Button>
             </Form.Item>
         </Form>

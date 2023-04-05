@@ -3,7 +3,20 @@ import Dashboard from "@/components/dashboard/";
 import { Usercontext } from "@/contexts/user";
 import Router from "next/router";
 import React from 'react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
+export async function getServerSideProps({ locale }:{locale:string}) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, [
+        'navbar',
+        'dashboard',
+        'card'
+
+      ])),
+    },
+  }
+}
 const Panel = () => {
     const { user } = React.useContext(Usercontext);
     

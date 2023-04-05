@@ -20,17 +20,17 @@ const Dashboard = () => {
     const {xs,xl} = useBreakpoint()
     const Items: MenuProps["items"] = [
         {
-            label:"Download Template",
+            label:t("dashboard:downloadtemp"),
             key:"1",
             icon:<DownloadOutlined/>
         },
         {
-            label:"Import Jobs",
+            label:t("dashboard:importjob"),
             key:"2",
             icon:<UploadOutlined/>
         },
         {
-            label:"Add new Job",
+            label:t("dashboard:addjob"),
             key:"3",
             icon:<PlusCircleFilled/>,
             onClick:()=>setOpen(true)

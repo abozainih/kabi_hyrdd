@@ -101,8 +101,8 @@ const JobCard = (
                         <Col style={{textAlign:((!xl && md)|| xs)?"start":"end"}} span={24}>
                             <Space size={0} direction={"vertical"}>
                                 <Typography.Text>{t("card:currentreqstatus")}</Typography.Text>
-                                <Typography.Text type={reqStatus? "success":"danger"}>{reqStatus? t("card:requested"):t("card:")}</Typography.Text>
-                                <Typography.Link>View Details</Typography.Link>
+                                <Typography.Text type={reqStatus? "success":"danger"}>{reqStatus? t("card:requested"):t("card:notreq")}</Typography.Text>
+                                <Typography.Link>{t("card:viewdetails")}</Typography.Link>
                             </Space>
                         </Col>
                         <Col span={24}>
@@ -110,20 +110,20 @@ const JobCard = (
                                 <Col xs={24} md={7} lg={8} xl={7}>
                                     <Card bordered={false} style={{height:"100%"}} size={"small"} className={styles.card}>
                                         <Typography.Text strong>{vacanciesBudget}</Typography.Text>
-                                        <Typography.Paragraph>Total Budgeted Vacancies</Typography.Paragraph>
+                                        <Typography.Paragraph>{t("card:totalvac")}</Typography.Paragraph>
                             
                                     </Card>
                                 </Col>
                                 <Col xs={24} md={7} lg={8} xl={7}>
                                     <Card bordered={false} style={{height:"100%"}} size={"small"} className={styles.card}>
                                         <Typography.Text type={"success"} strong>{vacanciesOpen}</Typography.Text>
-                                        <Typography.Paragraph>Vacancies still open</Typography.Paragraph>
+                                        <Typography.Paragraph>{t("card:vacopen")}</Typography.Paragraph>
                                     </Card>
                                 </Col>
                                 <Col xs={24} md={7} lg={8} xl={7}>
                                     <Card bordered={false} style={{height:"100%"}} size={"small"} className={styles.card}>
                                     <Typography.Text type={"danger"} strong>{vacanciesField}</Typography.Text>
-                                    <Typography.Paragraph>Vacancies Field</Typography.Paragraph>
+                                    <Typography.Paragraph>{t("card:vacfield")}</Typography.Paragraph>
                                         
                                     </Card>
                                 </Col>

@@ -18,16 +18,17 @@ export async function getServerSideProps({ locale }:{locale:string}) {
   }
 }
 const Panel = () => {
-    const { user } = React.useContext(Usercontext);
-    
+    const { user } = React.useContext(Usercontext);    
     React.useEffect(() => {
         if (!user) Router.push("/login");
     }, [user]);
 
     return (
-
-        <BaseLayout title="Dashboard" PageComponent={Dashboard} />
+        user &&  <BaseLayout title="Dashboard" PageComponent={Dashboard} />
     )
+      
+      
+    
 
 }
  

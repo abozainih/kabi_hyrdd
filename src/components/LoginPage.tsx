@@ -20,7 +20,7 @@ const LoginPage = () => {
                     <Typography.Paragraph className={styles.my1}>{langData.t("login:noaccount")} <Link href={"#"} style={{color:token.colorPrimary}}>{langData.t("login:register")}</Link></Typography.Paragraph>
                 </Space>
             </Col>
-            <Col xl={5} lg={8} md={10} sm={24} xs={24} className={`${styles.dFlex} ${styles.flexDC} ${styles.alginItemsEnd}`}>
+            <Col xl={6} lg={8} md={8} sm={24} xs={24} className={`${styles.dFlex} ${styles.flexDC}`}>
                 <LoginForm/>
             </Col>
         </Row>

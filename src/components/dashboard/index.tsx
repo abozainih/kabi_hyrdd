@@ -133,8 +133,8 @@ const Dashboard = () => {
                 </Col>
                 {dataCard.map(item=>{
                     return (
-                        <Col span={24}>
-                            <JobCard {...getData(
+                        <Col key={`job-col-${item.id}`} span={24}>
+                            <JobCard key={`job-card-${item.id}`} {...getData(
                                 item.id,
                                 item.jobTitle,
                                 item.reqType,

@@ -21,7 +21,7 @@ const Login = () => {
         if (user) Router.push("/dashboard");
     }, [user]);
     return ( 
-        <BaseLayout title='Login' PageComponent={LoginPage} />
+      !user && <BaseLayout title='Login' PageComponent={LoginPage} />
     );
 }
  

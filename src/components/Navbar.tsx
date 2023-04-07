@@ -9,6 +9,8 @@ import { LangContext } from "@/contexts/lang";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { DirContext } from "@/contexts/direction";
+import Image from 'next/image'
+
 
 const { useBreakpoint } = Grid;
 
@@ -51,12 +53,10 @@ const Navbar = ({setToggler}:TogglerProps) => {
       }
     return (
         <nav className={styles.navbar}>
-            <Row justify={"space-between"}>
-                <Col>
-                    <Space>
+            <Row align={"middle"} justify={"space-between"}>
+                <Col className={`${styles.dFlex} ${styles.aligItemsCenter}`}>
                         {(!(lg) && user) && <MenuOutlined onClick={()=>setToggler(true)}  style={{fontSize:"20px"}} />}
-                        <Typography.Text strong className={styles.title}>HYRDD</Typography.Text>
-                    </Space>
+                        <Image width={200} height={32} src={"/images/LOGO-h-01.png"} alt="HYRDD" />
                 </Col>
                 <Col>
                    <Space size={!(lg||md)? "small":"middle"}>

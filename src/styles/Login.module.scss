@@ -1,7 +1,9 @@
 @import "_globals";
 
 .leadingText{
-    background:$colorSecoundry;
+    background:url(../../public/images/bg-login.png);
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .form {
@@ -15,11 +17,35 @@
                 justify-content: space-between;
             }
         }
-        .remember {
+
+    }
+    
+    .remember {
+            .ant-form-item-control-input-content{
+                display: flex !important;
+                justify-content: space-between !important;
+            }
             div:last-child {
                 display: flex;
                 justify-content: space-between;
             }
         }
     }
-}
+
+    .formLabel{
+        position: relative;
+        margin-bottom: 8px;
+        display: inline-block;
+
+        &::after{
+            content:"*";
+            color:red;
+            display: block;
+            position: absolute;
+            z-index: 2;
+            top: 2px;
+            right: -9px;
+   
+        }
+    }
+

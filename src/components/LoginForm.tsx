@@ -36,8 +36,8 @@ const LoginForm = ()=>{
         required: "${name} is required!",
       }
     const passwordLabel = (
-        <div>
-            <span>{langData.t("login:password")}</span>
+        <div className={`${styles.dFlex} ${styles.justifyContentBetween}`}>
+            <span className={styles.formLabel}>{langData.t("login:password")}</span>
             <Typography.Link style={{color:token.colorPrimary}}  href="#API">{langData.t("login:forgotpassword")}</Typography.Link>
         </div>
     );
@@ -46,6 +46,7 @@ const LoginForm = ()=>{
         form={form}
         name="loginForm"
         layout={"vertical"}
+        size={"middle"}
         validateTrigger={"onBlur"}
         initialValues={{ remember: true }}
         validateMessages={validateMessages}
@@ -60,19 +61,21 @@ const LoginForm = ()=>{
                     <Alert message="Invalid Email/Password!" type="error" />
                 </Form.Item>
             }
+            <label className={styles.formLabel}>{langData.t("login:email")}</label>
             <Form.Item
-                label={langData.t("login:email")}
                 name="email"
                 rules={[{ required: true, type:"email"}]}
+                className={styles.mb1}
+
             >
                 <Input type={"email"} placeholder="you@example.com"  suffix={ <ExclamationCircleOutlined className={form.getFieldError('email').length>0? styles.dFlex : styles.dNone} />}/>
             </Form.Item>
+            {passwordLabel}
             <Form.Item
-                label={passwordLabel}
                 name="password"
                 validateTrigger={["onBlur"]}
                 rules={[{ required: true}]}
-                className={styles.passwordLabel}
+                className={`${styles.passwordLabel} ${styles.mb1}`}
                 
             >
                 <Input
@@ -82,14 +85,15 @@ const LoginForm = ()=>{
                     suffix={ <ExclamationCircleOutlined className={form.getFieldError('password').length>0? styles.dFlex : styles.dNone} />}
                 />
             </Form.Item>
-            <Form.Item className={styles.remember}>
+            <Form.Item className={`${styles.remember} ${styles.mb1}`}>
                 <Form.Item name="remember" valuePropName="checked" noStyle>
                     <Checkbox>{langData.t("login:remmberme")}</Checkbox>
                 </Form.Item>
-
-                <Link href="#" style={{color:token.colorPrimary}}>
-                    {langData.t("login:resetmulti")}
-                </Link>
+                <Form.Item noStyle>
+                    <Link href="#" style={{color:token.colorPrimary}}>
+                        {langData.t("login:resetmulti")}
+                    </Link>
+                </Form.Item>
             </Form.Item>
 
             <Form.Item>

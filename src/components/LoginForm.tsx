@@ -1,4 +1,4 @@
-import {Row, Col, Button, Typography, theme, Form, Input, Checkbox, Alert} from 'antd';
+import {Button, Typography, theme, Form, Input, Checkbox, Alert} from 'antd';
 import {ExclamationCircleOutlined} from  "@ant-design/icons"
 import styles from "@/styles/Login.module.scss"
 import React from 'react';
@@ -24,7 +24,6 @@ const LoginForm = ()=>{
             form.validateFields(['password'])
             .then(val=>setError(prev=>{return{password:false,email:prev.email}}))
             .catch(err=>setError(prev=>{return{password:true,email:prev.email}}))
-
       }
 
     const onFinish = (values:any)=>{

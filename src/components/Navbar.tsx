@@ -17,7 +17,7 @@ const Navbar = ({setToggler}:TogglerProps) => {
 
     const {t,i18n} = React.useContext(LangContext)
     const router = useRouter()
-    const {md, lg} = useBreakpoint();
+    const {md, lg,xs} = useBreakpoint();
     const [open, setOpen] = React.useState<boolean>(false);
     const {user, setUser} = React.useContext(Usercontext);
     const Signout = ()=>{
@@ -53,8 +53,8 @@ const Navbar = ({setToggler}:TogglerProps) => {
         <nav className={styles.navbar}>
             <Row align={"middle"} justify={"space-between"}>
                 <Col className={`${styles.dFlex} ${styles.aligItemsCenter}`}>
-                        {(!(lg) && user) && <MenuOutlined onClick={()=>setToggler(true)}  style={{fontSize:"20px"}} />}
-                        <Image width={200} height={32} src={"/images/LOGO-h-01.png"} alt="HYRDD" />
+                        {(!(lg) && user) && <MenuOutlined onClick={()=>setToggler(true)} className={i18n.language=="en"?styles.mr1:styles.ml1}  style={{fontSize:"20px"}} />}
+                        <Image width={xs?90:200} height={xs?20:32} src={"/images/LOGO-h-01.png"} alt="HYRDD" />
                 </Col>
                 <Col>
                    <Space size={!(lg||md)? "small":"middle"}>

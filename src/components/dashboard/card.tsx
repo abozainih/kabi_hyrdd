@@ -27,7 +27,7 @@ const JobCard = (
 
     const {md,xl,xs} = useBreakpoint()
     const [open,setOpen] = React.useState<boolean>(false);
-    const {t} = React.useContext(LangContext)
+    const {t,i18n} = React.useContext(LangContext)
     const DropdownItem: MenuProps["items"] = [
         {
             key:"1",
@@ -108,20 +108,20 @@ const JobCard = (
                         <Col span={24}>
                             <Row justify={((!xl && md)|| xs)?"start":"end"} gutter={[0,25]}>
                                 <Col xs={24} md={7} lg={8} xl={7}>
-                                    <Card bordered={false} style={{height:"100%"}} size={"small"} className={styles.card}>
+                                    <Card bordered={false} style={{height:"100%"}} size={"small"} className={`${styles.card} `+ (i18n.language=="en"? styles.rightGradient : styles.leftGradient)}>
                                         <Typography.Text strong>{vacanciesBudget}</Typography.Text>
                                         <Typography.Paragraph>{t("card:totalvac")}</Typography.Paragraph>
                             
                                     </Card>
                                 </Col>
                                 <Col xs={24} md={7} lg={8} xl={7}>
-                                    <Card bordered={false} style={{height:"100%"}} size={"small"} className={styles.card}>
+                                    <Card bordered={false} style={{height:"100%"}} size={"small"} className={`${styles.card} `+ (i18n.language=="en"? styles.rightGradient : styles.leftGradient)}>
                                         <Typography.Text type={"success"} strong>{vacanciesOpen}</Typography.Text>
                                         <Typography.Paragraph>{t("card:vacopen")}</Typography.Paragraph>
                                     </Card>
                                 </Col>
                                 <Col xs={24} md={7} lg={8} xl={7}>
-                                    <Card bordered={false} style={{height:"100%"}} size={"small"} className={styles.card}>
+                                    <Card bordered={false} style={{height:"100%"}} size={"small"} className={`${styles.card} `+ (i18n.language=="en"? styles.rightGradient : styles.leftGradient)}>
                                     <Typography.Text type={"danger"} strong>{vacanciesField}</Typography.Text>
                                     <Typography.Paragraph>{t("card:vacfield")}</Typography.Paragraph>
                                         

@@ -10,17 +10,22 @@ import { LangContext } from '@/contexts/lang';
 const LoginForm = ()=>{
     const { token } = theme.useToken();
     const langData = React.useContext(LangContext)
-    const [disabled, setDisabled] = React.useState<boolean>(false)
+    const [error,setError] = React.useState<{email:boolean,password:boolean}>({email:false,password:false})
     const [form] = Form.useForm()
     const [showAlert,setShowAlert] = React.useState<boolean>(false)
-    const {user,setUser} = React.useContext(Usercontext)
-    const onValuesChange =(changedValues:any,allValues:any)=>{
-        if(form.isFieldTouched("password") && form.isFieldTouched("email")){
-            form.validateFields()
-            .then(values=>setDisabled(false))
-            .catch(error=>setDisabled(true))
-        }
-    }
+    const {setUser} = React.useContext(Usercontext)
+
+    const onChange = (e: React.FormEvent<HTMLInputElement>) => {
+        e.currentTarget.type == "email"?
+            form.validateFields(["email"])
+            .then(val=>setError(prev=>{return{password:prev.password,email:false}}))
+            .catch(err=>setError(prev=>{return{password:prev.password,email:true}}))
+            :
+            form.validateFields(['password'])
+            .then(val=>setError(prev=>{return{password:false,email:prev.email}}))
+            .catch(err=>setError(prev=>{return{password:true,email:prev.email}}))
+
+      }
 
     const onFinish = (values:any)=>{
         if(data.some(user => user.email == values.email && user.password == values.password))
@@ -30,10 +35,17 @@ const LoginForm = ()=>{
     }
 
     const onFinishFeild = ()=>{
-        setDisabled(true) 
+        form.getFieldsError(["password","email"]).forEach(item=>{
+            if(item.errors.length>0){
+                item.name[0]=="email"?
+                    setError(prev=>{return{password:prev.password,email:true}})
+                    :
+                    setError(prev=>{return{password:true,email:prev.email}})
+            }
+        })
     }
     const validateMessages = {
-        required: "${name} is required!",
+        required: "Required Field",
       }
     const passwordLabel = (
         <div className={`${styles.dFlex} ${styles.justifyContentBetween}`}>
@@ -47,13 +59,13 @@ const LoginForm = ()=>{
         name="loginForm"
         layout={"vertical"}
         size={"middle"}
-        validateTrigger={"onBlur"}
         initialValues={{ remember: true }}
         validateMessages={validateMessages}
-        onValuesChange={onValuesChange}
+        // onValuesChange={onValuesChange}
         onFinishFailed={onFinishFeild}
         onFinish={onFinish}
         className={styles.form}
+        requiredMark={false}
         >
             {
                 showAlert &&
@@ -61,28 +73,30 @@ const LoginForm = ()=>{
                     <Alert message="Invalid Email/Password!" type="error" />
                 </Form.Item>
             }
-            <label className={styles.formLabel}>{langData.t("login:email")}</label>
             <Form.Item
+                label={<span className={styles.formLabel}>{langData.t("login:email")}</span>}
                 name="email"
                 rules={[{ required: true, type:"email"}]}
-                className={styles.mb1}
-
-            >
-                <Input type={"email"} placeholder="you@example.com"  suffix={ <ExclamationCircleOutlined className={form.getFieldError('email').length>0? styles.dFlex : styles.dNone} />}/>
+                className={styles.mb1}            >
+                <Input
+                 type={"email"}
+                 onChange={onChange}
+                //  onBlur={onBlur}
+                 placeholder="you@example.com"
+                 suffix={<ExclamationCircleOutlined className={error.email? styles.dFlex : styles.dNone} />}
+                 />
             </Form.Item>
-            {passwordLabel}
             <Form.Item
+                label={passwordLabel}
                 name="password"
-                validateTrigger={["onBlur"]}
                 rules={[{ required: true}]}
                 className={`${styles.passwordLabel} ${styles.mb1}`}
-                
             >
                 <Input
                     type="password"
+                    onChange={onChange}
                     placeholder="Enter your password"
-
-                    suffix={ <ExclamationCircleOutlined className={form.getFieldError('password').length>0? styles.dFlex : styles.dNone} />}
+                    suffix={ <ExclamationCircleOutlined className={error.password? styles.dFlex : styles.dNone} />}
                 />
             </Form.Item>
             <Form.Item className={`${styles.remember} ${styles.mb1}`}>
@@ -97,7 +111,7 @@ const LoginForm = ()=>{
             </Form.Item>
 
             <Form.Item>
-                <Button style={disabled? {borderColor:"transparent"} : {}} disabled={disabled} block type="primary" htmlType="submit">
+                <Button style={(error.email || error.password)? {borderColor:"transparent"} : {}} disabled={(error.email || error.password)? true:false} block type="primary" htmlType="submit">
                     {langData.t("login:signin")}
                 </Button>
             </Form.Item>
@@ -105,4 +119,4 @@ const LoginForm = ()=>{
     )
 }
 
-export default LoginForm;
+export default LoginForm

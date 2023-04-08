@@ -19,6 +19,22 @@
         }
 
     }
+
+        .formLabel{
+            position: relative;
+            display: inline-block;
+    
+            &::after{
+                content:"*";
+                color:red;
+                display: block;
+                position: absolute;
+                z-index: 2;
+                top: 2px;
+                right: -9px;
+       
+            }
+        }
     
     .remember {
             .ant-form-item-control-input-content{
@@ -31,21 +47,3 @@
             }
         }
     }
-
-    .formLabel{
-        position: relative;
-        margin-bottom: 8px;
-        display: inline-block;
-
-        &::after{
-            content:"*";
-            color:red;
-            display: block;
-            position: absolute;
-            z-index: 2;
-            top: 2px;
-            right: -9px;
-   
-        }
-    }
-

@@ -8,7 +8,6 @@ import { TogglerProps } from "@/types/toggler";
 import { LangContext } from "@/contexts/lang";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { DirContext } from "@/contexts/direction";
 import Image from 'next/image'
 
 
@@ -16,10 +15,9 @@ const { useBreakpoint } = Grid;
 
 const Navbar = ({setToggler}:TogglerProps) => {
 
-    const langData = React.useContext(LangContext)
-    const {dir,setDir} = React.useContext(DirContext)
+    const {t,i18n} = React.useContext(LangContext)
     const router = useRouter()
-    const { md, lg} = useBreakpoint();
+    const {md, lg} = useBreakpoint();
     const [open, setOpen] = React.useState<boolean>(false);
     const {user, setUser} = React.useContext(Usercontext);
     const Signout = ()=>{
@@ -39,7 +37,7 @@ const Navbar = ({setToggler}:TogglerProps) => {
             type: 'divider',
           },
           {
-            label: langData.t("navbar:signout"),
+            label: t("navbar:signout"),
             icon: <LogoutOutlined />,
             danger:true,
             key: '3',
@@ -60,9 +58,9 @@ const Navbar = ({setToggler}:TogglerProps) => {
                 </Col>
                 <Col>
                    <Space size={!(lg||md)? "small":"middle"}>
-                        <Link href={router.asPath} locale={langData.i18n.language == "en"? "ar":"en"}>
-                            <Button onClick={()=>setDir(prevDir=>prevDir=="rtl"? "ltr":"rtl")}>
-                                {langData.i18n.language == "ar"? "English": "العربية"}
+                        <Link href={router.asPath} locale={i18n.language == "en"? "ar":"en"}>
+                            <Button>
+                                {i18n.language == "ar"? "English": "العربية"}
                             </Button>
                         </Link>
                     {

@@ -9,7 +9,7 @@ import { LangContext } from '@/contexts/lang';
 
 const LoginForm = ()=>{
     const { token } = theme.useToken();
-    const langData = React.useContext(LangContext)
+    const {t,i18n} = React.useContext(LangContext)
     const [error,setError] = React.useState<{email:boolean,password:boolean}>({email:false,password:false})
     const [form] = Form.useForm()
     const [showAlert,setShowAlert] = React.useState<boolean>(false)
@@ -43,13 +43,11 @@ const LoginForm = ()=>{
             }
         })
     }
-    const validateMessages = {
-        required: "Required Field",
-      }
+
     const passwordLabel = (
         <div className={`${styles.dFlex} ${styles.justifyContentBetween}`}>
-            <span className={styles.formLabel}>{langData.t("login:password")}</span>
-            <Typography.Link style={{color:token.colorPrimary}}  href="#API">{langData.t("login:forgotpassword")}</Typography.Link>
+            <span className={`${styles.formLabel} ` + (i18n.language =="en"? ` ${styles.right}` : ` ${styles.left}`)}>{t("login:password")}</span>
+            <Typography.Link style={{color:token.colorPrimary}}  href="#API">{t("login:forgotpassword")}</Typography.Link>
         </div>
     );
     return (
@@ -59,8 +57,7 @@ const LoginForm = ()=>{
         layout={"vertical"}
         size={"middle"}
         initialValues={{ remember: true }}
-        validateMessages={validateMessages}
-        // onValuesChange={onValuesChange}
+        validateMessages={{required:()=>t("login:reqfield"),types:{email:()=>t("login:notvalidemail")}}}
         onFinishFailed={onFinishFeild}
         onFinish={onFinish}
         className={styles.form}
@@ -69,14 +66,14 @@ const LoginForm = ()=>{
             {
                 showAlert &&
                 <Form.Item>
-                    <Alert message="Invalid Email/Password!" type="error" />
+                    <Alert message={t("login:invalidep")} type="error" />
                 </Form.Item>
             }
             <Form.Item
-                label={<span className={styles.formLabel}>{langData.t("login:email")}</span>}
+                label={<span className={`${styles.formLabel} ` + (i18n.language =="en"? ` ${styles.right}` : ` ${styles.left}`)}>{t("login:email")}</span>}
                 name="email"
                 rules={[{ required: true, type:"email"}]}
-                className={styles.mb1}            >
+                className={styles.mb1}>
                 <Input
                  type={"email"}
                  onChange={onChange}
@@ -94,24 +91,24 @@ const LoginForm = ()=>{
                 <Input
                     type="password"
                     onChange={onChange}
-                    placeholder="Enter your password"
+                    placeholder={t("login:enterpassword")||undefined}
                     suffix={ <ExclamationCircleOutlined className={error.password? styles.dFlex : styles.dNone} />}
                 />
             </Form.Item>
             <Form.Item className={`${styles.remember} ${styles.mb1}`}>
                 <Form.Item name="remember" valuePropName="checked" noStyle>
-                    <Checkbox>{langData.t("login:remmberme")}</Checkbox>
+                    <Checkbox>{t("login:remmberme")}</Checkbox>
                 </Form.Item>
                 <Form.Item noStyle>
                     <Link href="#" style={{color:token.colorPrimary}}>
-                        {langData.t("login:resetmulti")}
+                        {t("login:resetmulti")}
                     </Link>
                 </Form.Item>
             </Form.Item>
 
             <Form.Item>
                 <Button style={(error.email || error.password)? {borderColor:"transparent"} : {}} disabled={(error.email || error.password)? true:false} block type="primary" htmlType="submit">
-                    {langData.t("login:signin")}
+                    {t("login:signin")}
                 </Button>
             </Form.Item>
         </Form>

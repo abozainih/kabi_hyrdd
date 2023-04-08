@@ -6,7 +6,7 @@ import styles from "@/styles/Home.module.scss"
 import { Usercontext } from '@/contexts/user'
 import Sidebar from './dashboard/sidebar'
 import ItemsProvider from '@/contexts/sidebarItems'
-import { DirContext } from '@/contexts/direction'
+import { LangContext } from '@/contexts/lang'
 
 type BaseLayoutProp ={
     title:string,
@@ -16,12 +16,12 @@ type BaseLayoutProp ={
 const {useBreakpoint} = Grid;
 const BaseLayout = ({title,PageComponent}:BaseLayoutProp) => {
     const [toggler, setToggler] = React.useState(false);
+    const {i18n} = React.useContext(LangContext)
     const {lg, md} = useBreakpoint();
     const {user} = React.useContext(Usercontext)
-    const {dir} = React.useContext(DirContext)
 
     return (
-      <ConfigProvider direction={dir}  theme={{
+      <ConfigProvider direction={i18n.language == "en"? "ltr":"rtl"}  theme={{
         token:{
             colorPrimary:"#7B68F6",
         },
@@ -31,7 +31,6 @@ const BaseLayout = ({title,PageComponent}:BaseLayoutProp) => {
           },
           Button:{
             colorBgContainerDisabled:"#F6F4FF",
-            // colorBorder:"transparent"
           }
         }
       }}>

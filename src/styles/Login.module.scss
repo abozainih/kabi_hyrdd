@@ -30,9 +30,18 @@
                 display: block;
                 position: absolute;
                 z-index: 2;
-                top: 2px;
-                right: -9px;
-       
+                top: 2px;       
+            }
+
+        }
+        .right{
+            &::after{
+                right:-9px;
+            }
+        }
+        .left{
+            &::after{
+                left:-9px;
             }
         }
     

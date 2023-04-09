@@ -42,6 +42,13 @@ const JobCard = (
             onClick:()=>setOpen(true)
         },
     ]
+    const title =
+                    i18n.language == "ar"?
+                    <>{jobTitle}   <span className={styles.fontWeightNormal}>:{id}#</span></>
+                    :
+                    <><span className={styles.fontWeightNormal}>#{id}: </span> {jobTitle}</>
+                
+        
     const extras = (xs?
         <Dropdown menu={{ items:DropdownItem }} placement={"bottomRight"} trigger={['click']} arrow={{ pointAtCenter: true }}>
                         <Button icon={<MoreOutlined />}/>
@@ -57,7 +64,7 @@ const JobCard = (
     return ( 
         <>
         <DeleteModal id={id} deleteItem={deleteItem} open={open} setOpen={setOpen}/>
-        <Card title={<><span style={{fontWeight:"normal"}}>#{id}:</span> {jobTitle}</> } extra={extras}>
+        <Card title={title} extra={extras}>
             <Row>
                 <Col md={24} xl={8}>
                         <Row gutter={[0,((!xl && md)|| xs)?15:10]}>
@@ -98,7 +105,7 @@ const JobCard = (
                 </Col>
                 <Col xs={24} md={24} xl={16}>
                     <Row gutter={[0,25]}>
-                        <Col style={{textAlign:((!xl && md)|| xs)?"start":"end"}} span={24}>
+                        <Col className={((!xl && md)|| xs)? styles.alignTextStart:styles.alignTextEnd} span={24}>
                             <Space size={0} direction={"vertical"}>
                                 <Typography.Text>{t("card:currentreqstatus")}</Typography.Text>
                                 <Typography.Text type={reqStatus? "success":"danger"}>{reqStatus? t("card:requested"):t("card:notreq")}</Typography.Text>
@@ -108,20 +115,20 @@ const JobCard = (
                         <Col span={24}>
                             <Row justify={((!xl && md)|| xs)?"start":"end"} gutter={[0,25]}>
                                 <Col xs={24} md={7} lg={8} xl={7}>
-                                    <Card bordered={false} style={{height:"100%"}} size={"small"} className={`${styles.card} `+ (i18n.language=="en"? styles.rightGradient : styles.leftGradient)}>
+                                    <Card bordered={false} size={"small"} className={`${styles.h100} ${styles.card} `+ (i18n.language=="en"? styles.rightGradient : styles.leftGradient)}>
                                         <Typography.Text strong>{vacanciesBudget}</Typography.Text>
                                         <Typography.Paragraph>{t("card:totalvac")}</Typography.Paragraph>
                             
                                     </Card>
                                 </Col>
                                 <Col xs={24} md={7} lg={8} xl={7}>
-                                    <Card bordered={false} style={{height:"100%"}} size={"small"} className={`${styles.card} `+ (i18n.language=="en"? styles.rightGradient : styles.leftGradient)}>
+                                    <Card bordered={false} size={"small"} className={`${styles.h100}  ${styles.card} `+ (i18n.language=="en"? styles.rightGradient : styles.leftGradient)}>
                                         <Typography.Text type={"success"} strong>{vacanciesOpen}</Typography.Text>
                                         <Typography.Paragraph>{t("card:vacopen")}</Typography.Paragraph>
                                     </Card>
                                 </Col>
                                 <Col xs={24} md={7} lg={8} xl={7}>
-                                    <Card bordered={false} style={{height:"100%"}} size={"small"} className={`${styles.card} `+ (i18n.language=="en"? styles.rightGradient : styles.leftGradient)}>
+                                    <Card bordered={false} size={"small"} className={`${styles.h100}  ${styles.card} `+ (i18n.language=="en"? styles.rightGradient : styles.leftGradient)}>
                                     <Typography.Text type={"danger"} strong>{vacanciesField}</Typography.Text>
                                     <Typography.Paragraph>{t("card:vacfield")}</Typography.Paragraph>
                                         

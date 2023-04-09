@@ -54,7 +54,7 @@ const Navbar = ({setToggler}:TogglerProps) => {
             <Row align={"middle"} justify={"space-between"}>
                 <Col className={`${styles.dFlex} ${styles.aligItemsCenter}`}>
                         {(!(lg) && user) && <MenuOutlined onClick={()=>setToggler(true)} className={`${styles.navBarIconMenu} `+(i18n.language=="en"?styles.mr1:styles.ml1)}/>}
-                        <Image width={xs?90:200} height={xs?20:32} src={"/images/LOGO-h-01.png"} alt="HYRDD" />
+                        <Image width={xs?90:200} height={xs?20:32} src={"/static/images/LOGO-h-01.png"} alt="HYRDD" />
                 </Col>
                 <Col>
                    <Space size={!(lg||md)? "small":"middle"}>

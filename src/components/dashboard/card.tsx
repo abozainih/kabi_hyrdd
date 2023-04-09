@@ -91,10 +91,10 @@ const JobCard = (
                                 <Space direction={"vertical"}>
                                     <Typography.Text strong>{t("card:hiringmanager")}</Typography.Text>
                                     <Space>
-                                        {hiringManagers.map(item=>{
+                                        {hiringManagers.map((item,index)=>{
                                             return(
 
-                                                <Typography.Text className={`${styles.bgSuccess} ${styles.hiringManagers}`} >{item}</Typography.Text>
+                                                <Typography.Text key={index} className={`${styles.bgSuccess} ${styles.hiringManagers}`} >{item}</Typography.Text>
                                             )
                                         })}
                                     </Space>

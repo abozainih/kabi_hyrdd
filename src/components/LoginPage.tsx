@@ -16,8 +16,8 @@ const LoginPage = () => {
                 <Space size={"small"} className={((xs||md||sm) && !xl ?styles.w100:styles.w60) +` ${styles.leadingText} ${styles.py1}`} direction={"vertical"}>
                     <Typography.Title  className={styles.m0} level={1}>{langData.t("login:hi")}</Typography.Title>
                     <Typography.Title className={styles.m0} level={1}>{langData.t("login:welcome")}</Typography.Title>
-                    <Typography.Title  className={styles.m0} style={{color:token.colorPrimary}} level={1}>{langData.t("login:HYRDD")}</Typography.Title>
-                    <Typography.Paragraph className={styles.my1}>{langData.t("login:noaccount")} <Link href={"#"} style={{color:token.colorPrimary}}>{langData.t("login:register")}</Link></Typography.Paragraph>
+                    <Typography.Title  className={`${styles.m0} ${styles.primaryColor}`}  level={1}>{langData.t("login:HYRDD")}</Typography.Title>
+                    <Typography.Paragraph className={styles.my1}>{langData.t("login:noaccount")} <Link href={"#"} className={styles.primaryColor}>{langData.t("login:register")}</Link></Typography.Paragraph>
                 </Space>
             </Col>
             <Col xl={7} lg={8} md={8} sm={24} xs={24} className={`${styles.dFlex} ${styles.flexDC}`}>

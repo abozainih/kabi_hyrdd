@@ -91,12 +91,12 @@ function getItem(
   }
 
 const Items = [
-    {label: "Dashboard", key:"dashboard", icon: <DashboardFilled style={{fontSize:"17px"}} />, className: styles.menuItem},
-    {label:"Jobs", key:"jobs", icon:<AccountBookFilled style={{fontSize:"17px"}}  />, className: styles.menuItem},
-    {label:"Candidates", key:"candidates", icon:<DashboardFilled style={{fontSize:"17px"}}  />, className: styles.menuItem},
-    {label:"Agencies", key:"agencies", icon:<CrownFilled style={{fontSize:"17px"}}  />, className: styles.menuItem},
-    {label:"Folders", key:"folders", icon:<FolderFilled style={{fontSize:"17px"}}  />, className: styles.menuItem},
-    {label:"Settings", key:"settings", icon:<SettingFilled style={{fontSize:"17px"}}  />, className: styles.menuItem}
+    {label: "Dashboard", key:"dashboard", icon: <DashboardFilled className={styles.menuItemIcon} />, className: styles.menuItem},
+    {label:"Jobs", key:"jobs", icon:<AccountBookFilled className={styles.menuItemIcon}  />, className: styles.menuItem},
+    {label:"Candidates", key:"candidates", icon:<DashboardFilled className={styles.menuItemIcon}  />, className: styles.menuItem},
+    {label:"Agencies", key:"agencies", icon:<CrownFilled className={styles.menuItemIcon}  />, className: styles.menuItem},
+    {label:"Folders", key:"folders", icon:<FolderFilled className={styles.menuItemIcon}  />, className: styles.menuItem},
+    {label:"Settings", key:"settings", icon:<SettingFilled className={styles.menuItemIcon}  />, className: styles.menuItem}
 ]
 
 const itemsWithChilds: MenuItem[] = [];

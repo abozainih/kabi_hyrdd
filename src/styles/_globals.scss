@@ -109,6 +109,14 @@ $backGroundSuccess:#EEF9EB;
     border-radius: 6px !important;
 }
 
+.noBorder{
+    border-color:"transparent" !important;
+}
+
+.cursorPointer{
+    cursor: pointer !important;
+}
+
 .bgSuccess{
     background-color: $backGroundSuccess;
 }
@@ -142,3 +150,7 @@ $backGroundSuccess:#EEF9EB;
 .alignTextEnd{
     text-align: end !important;
 }
+
+.minHeightBody{
+    min-height: calc(100vh - 70px)
+  }

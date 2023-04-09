@@ -109,9 +109,9 @@ const Dashboard = () => {
                     <Row justify={"space-between"}>
                         <Col>
                             <Space>
-                                <AutoComplete onChange={setValue} allowClear value={searchValue} onSearch={onSearch} onSelect={onSelectItem} options={options} filterOption={true} style={{ width: 200 }} size={xs?"middle":"large"} placeholder="Search" />
-                                <Button onClick={filterData} size={xs?"middle":"large"} className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter}`}  type="primary" icon={<SearchOutlined style={{fontSize:"10px"}} />} />
-                                <Button onClick={resetData} size={xs?"middle":"large"} className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter} ${styles.secoundryButton}`} icon={<ReloadOutlined style={{fontSize:"10px"}} />} />
+                                <AutoComplete onChange={setValue} allowClear value={searchValue} onSearch={onSearch} onSelect={onSelectItem} options={options} filterOption={true} style={{ width: xl?300:200 }} size={xs?"middle":"large"} placeholder="Search" />
+                                <Button onClick={filterData} size={xs?"middle":"large"} className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter}`}  type="primary" icon={<SearchOutlined className={styles.navBarIconMenu} />} />
+                                <Button onClick={resetData} size={xs?"middle":"large"} className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter} ${styles.secoundryButton}`} icon={<ReloadOutlined className={styles.navBarIconMenu} />} />
                                 <Button size={xs?"middle":"large"} className={(xs?` `:`${styles.ml1} `)+ `${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter} ${styles.secoundryButton} `} icon={<FilterOutlined />}>{xl?<span>{t("dashboard:filter")}</span>:""}</Button>
                             </Space>
                         </Col>
@@ -123,8 +123,8 @@ const Dashboard = () => {
                                 </Dropdown>
                             :
                                 <Space>
-                                    <Button size={"large"} className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter} ${styles.secoundryButton}`} icon={<DownloadOutlined style={{fontSize:"10px"}} />}>{xl?t("dashboard:downloadtemp"):""}</Button>
-                                    <Button size={"large"} className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter} ${styles.secoundryButton}`} icon={<UploadOutlined style={{fontSize:"10px"}} />}>{xl?t("dashboard:importjob"):""}</Button>
+                                    <Button size={"large"} className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter} ${styles.secoundryButton}`} icon={<DownloadOutlined className={styles.navBarIconMenu} />}>{xl?t("dashboard:downloadtemp"):""}</Button>
+                                    <Button size={"large"} className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter} ${styles.secoundryButton}`} icon={<UploadOutlined className={styles.navBarIconMenu} />}>{xl?t("dashboard:importjob"):""}</Button>
                                     <Button  size={"large"} onClick={()=>setOpen(true)} type="primary"  className={`${styles.dFlex} ${styles.justifyContentCenter} ${styles.alignItemsCenter}`} icon={<PlusCircleFilled />}>{xl?t("dashboard:addjob"):""}</Button>
                                 </Space> 
                         }

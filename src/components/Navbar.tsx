@@ -53,7 +53,7 @@ const Navbar = ({setToggler}:TogglerProps) => {
         <nav className={styles.navbar}>
             <Row align={"middle"} justify={"space-between"}>
                 <Col className={`${styles.dFlex} ${styles.aligItemsCenter}`}>
-                        {(!(lg) && user) && <MenuOutlined onClick={()=>setToggler(true)} className={i18n.language=="en"?styles.mr1:styles.ml1}  style={{fontSize:"20px"}} />}
+                        {(!(lg) && user) && <MenuOutlined onClick={()=>setToggler(true)} className={`${styles.navBarIconMenu} `+(i18n.language=="en"?styles.mr1:styles.ml1)}/>}
                         <Image width={xs?90:200} height={xs?20:32} src={"/images/LOGO-h-01.png"} alt="HYRDD" />
                 </Col>
                 <Col>
@@ -75,7 +75,7 @@ const Navbar = ({setToggler}:TogglerProps) => {
                              arrow={{pointAtCenter:false}}
                              trigger={['click']}
                              menu={{items}}>
-                                <Space style={{cursor:"pointer"}} size={"small"}>
+                                <Space className={styles.cursorPointer} size={"small"}>
                                     {(lg||md) && <span>{`${user.firstName} ${user.lastName}`}</span>}
                                     <Avatar icon={<UserOutlined />} />
                                     {open ? <UpOutlined /> : <DownOutlined />}

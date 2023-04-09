@@ -42,7 +42,7 @@ const BaseLayout = ({title,PageComponent}:BaseLayoutProp) => {
           <Layout.Header className={(user? `${styles.borderBottom} `+ styles.px1 : !lg? !md? styles.px1 :styles.px2 :  styles.px10)}>
             <Navbar toggler={toggler} setToggler={setToggler} />
           </Layout.Header>
-          <Layout hasSider style={{ minHeight: 'calc(100vh - 70px)' }}>
+          <Layout hasSider className={styles.minHeightBody}>
             { user &&
               <ItemsProvider>
                   <Sidebar toggler={toggler} setToggler={setToggler} />

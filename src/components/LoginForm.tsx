@@ -47,7 +47,7 @@ const LoginForm = ()=>{
     const passwordLabel = (
         <div className={`${styles.dFlex} ${styles.justifyContentBetween}`}>
             <span className={`${styles.formLabel} ` + (i18n.language =="en"? ` ${styles.right}` : ` ${styles.left}`)}>{t("login:password")}</span>
-            <Typography.Link style={{color:token.colorPrimary}}  href="#API">{t("login:forgotpassword")}</Typography.Link>
+            <Typography.Link className={styles.primaryColor} href="#API">{t("login:forgotpassword")}</Typography.Link>
         </div>
     );
     return (
@@ -100,14 +100,14 @@ const LoginForm = ()=>{
                     <Checkbox>{t("login:remmberme")}</Checkbox>
                 </Form.Item>
                 <Form.Item noStyle>
-                    <Link href="#" style={{color:token.colorPrimary}}>
+                    <Link href="#" className={styles.primaryColor}>
                         {t("login:resetmulti")}
                     </Link>
                 </Form.Item>
             </Form.Item>
 
             <Form.Item>
-                <Button style={(error.email || error.password)? {borderColor:"transparent"} : {}} disabled={(error.email || error.password)? true:false} block type="primary" htmlType="submit">
+                <Button className={(error.email || error.password)? styles.noBorder : ""} disabled={(error.email || error.password)? true:false} block type="primary" htmlType="submit">
                     {t("login:signin")}
                 </Button>
             </Form.Item>

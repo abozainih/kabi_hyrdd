@@ -110,7 +110,7 @@ $backGroundSuccess:#EEF9EB;
 }
 
 .noBorder{
-    border:"transparent" !important;
+    border:none !important;
 }
 
 .cursorPointer{
@@ -154,3 +154,7 @@ $backGroundSuccess:#EEF9EB;
 .minHeightBody{
     min-height: calc(100vh - 70px)
   }
+
+.noBackGround{
+    background: none !important;
+}

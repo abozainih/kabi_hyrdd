@@ -1,9 +1,25 @@
 @import "_globals";
 
 .leadingText{
-    background:url(../../public/static/images/bg-login.png);
-    background-size: contain;
-    background-repeat: no-repeat;
+    z-index: 1;
+    position: relative;
+    &:after{
+        background:url(../../public/static/images/bg-login.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        content:"";
+        width: 100%;
+        top: -11px;
+        position: absolute;
+        height: 105%;
+        display: block;
+        z-index: -1;
+    }
+}
+.rotateRight{
+    &:after{
+        transform: rotateY(180deg);
+    }
 }
 
 .form {

@@ -1,4 +1,4 @@
-import {Button, Typography, theme, Form, Input, Checkbox, Alert} from 'antd';
+import {Button, Typography, theme, Form, Input, Checkbox, Alert,Grid} from 'antd';
 import {ExclamationCircleOutlined} from  "@ant-design/icons"
 import styles from "@/styles/Login.module.scss"
 import React from 'react';
@@ -7,7 +7,9 @@ import Link from 'next/link';
 import { Usercontext } from '@/contexts/user';
 import { LangContext } from '@/contexts/lang';
 
+const {useBreakpoint} = Grid
 const LoginForm = ()=>{
+    const {sm,xs,md,lg} = useBreakpoint()
     const { token } = theme.useToken();
     const {t,i18n} = React.useContext(LangContext)
     const [error,setError] = React.useState<{email:boolean,password:boolean}>({email:false,password:false})
@@ -54,13 +56,13 @@ const LoginForm = ()=>{
         <Form
         form={form}
         name="loginForm"
+        className={`${styles.form} `+((sm||xs) && !(md)? styles.w100 : styles.w300px)}
         layout={"vertical"}
         size={"middle"}
         initialValues={{ remember: true }}
         validateMessages={{required:()=>t("login:reqfield"),types:{email:()=>t("login:notvalidemail")}}}
         onFinishFailed={onFinishFeild}
         onFinish={onFinish}
-        className={styles.form}
         requiredMark={false}
         >
             {

@@ -106,7 +106,7 @@ const Dashboard = () => {
             <CreateForm setOpen={setOpen} open={open} setDataCard={setDataCard}/>
             <Row  gutter={[0,10]} className={`${styles.my1} ${styles.mx1}`}>
                 <Col span={24}>
-                    <Row justify={"space-between"}>
+                    <Row gutter={[0,10]} justify={"space-between"}>
                         <Col>
                             <Space>
                                 <AutoComplete onChange={setValue} allowClear value={searchValue} onSearch={onSearch} onSelect={onSelectItem} options={options} filterOption={true} style={{ width: xl?300:200 }} size={xs?"middle":"large"} placeholder="Search" />

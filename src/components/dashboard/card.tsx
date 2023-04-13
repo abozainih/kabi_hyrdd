@@ -65,28 +65,28 @@ const JobCard = (
         <>
         <DeleteModal id={id} deleteItem={deleteItem} open={open} setOpen={setOpen}/>
         <Card title={title} extra={extras}>
-            <Row>
-                <Col md={24} xl={8}>
+            <Row gutter={[0,20]}>
+                <Col xs={24} md={24} xl={8}>
                         <Row gutter={[0,((!xl && md)|| xs)?15:10]}>
-                            <Col xs={24} md={8} xl={24}>
+                            <Col xs={24}>
                                 <Space size={0} direction={"vertical"}>
                                     <Typography.Text strong>{t("card:reqtype")}</Typography.Text>
                                     <Typography.Text>{reqType}</Typography.Text>
                                 </Space>
                             </Col>
-                            <Col xs={24} md={8} xl={24}>
+                            <Col xs={24}>
                             <Space size={0} direction={"vertical"}>
                                     <Typography.Text strong className={styles.primaryColor}>{t("card:ordstrucure")}</Typography.Text>
                                     <Typography.Text>{orgStructure}</Typography.Text>
                                 </Space>
                             </Col>
-                            <Col xs={24} md={8} xl={24}>
+                            <Col xs={24}>
                             <Space size={0} direction={"vertical"}>
                                     <Typography.Text strong>{t("card:units")}</Typography.Text>
                                     <Typography.Text>{Units?.toString()}</Typography.Text>
                                 </Space>
                             </Col>
-                            {xl && <Divider className={styles.my1} />} 
+                            <Divider className={styles.my1} />
                             <Col span={24}>
                                 <Space direction={"vertical"}>
                                     <Typography.Text strong>{t("card:hiringmanager")}</Typography.Text>
@@ -101,7 +101,6 @@ const JobCard = (
                                 </Space>
                             </Col>
                         </Row>
-                       {((md&&!xl) || xs) && <Divider className={styles.my1} />} 
                 </Col>
                 <Col xs={24} md={24} xl={16}>
                     <Row gutter={[0,25]}>

@@ -19,11 +19,16 @@ const BaseLayout = ({title,PageComponent}:BaseLayoutProp) => {
     const {i18n} = React.useContext(LangContext)
     const {lg, md,xl} = useBreakpoint();
     const {user} = React.useContext(Usercontext)
-
     return (
       <ConfigProvider direction={i18n.language == "en"? "ltr":"rtl"}  theme={{
         token:{
             colorPrimary:"#7B68F6",
+            screenXSMin:0,
+            screenXS:400,
+            screenXSMax:419,
+            screenSMMin:420,
+            screenSM:420,
+            screenSMMax:767,
         },
         components:{
           Layout:{

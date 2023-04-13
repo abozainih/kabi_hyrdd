@@ -26,17 +26,6 @@ const Navbar = ({setToggler}:TogglerProps) => {
     }
     const items: MenuProps['items'] = [
           {
-            label: "1st menu item",
-            key: '0',
-          },
-          {
-            label: "2nd menu item",
-            key: '1',
-          },
-          {
-            type: 'divider',
-          },
-          {
             label: t("navbar:signout"),
             icon: <LogoutOutlined />,
             danger:true,
@@ -57,27 +46,27 @@ const Navbar = ({setToggler}:TogglerProps) => {
                         <Image width={xs?90:200} height={xs?20:32} src={"/static/images/LOGO-h-01.png"} alt="HYRDD" />
                 </Col>
                 <Col>
-                   <Space size={!(lg||md)? "small":"middle"}>
+                   <Space size={!(lg||md)? (xs?2:"small"):"middle"}>
                         <Link href={router.asPath} locale={i18n.language == "en"? "ar":"en"}>
-                            <Button>
-                                {i18n.language == "ar"? "English": "العربية"}
+                            <Button size={xs?"small":"middle"}>
+                                {i18n.language == "ar"? (!xs?"English":"EN"): (!xs?"العربية":"ع")}
                             </Button>
                         </Link>
                     {
                         user && 
                         <>
-                            <Button type={"text"} shape={"circle"} size={"large"} icon={<BellOutlined />} />
-                            <Button type={"text"} shape={"circle"} size={"large"} icon={<QuestionCircleOutlined />} />
+                            <Button type={"text"} shape={"circle"} size={xs?"small":"large"} icon={<BellOutlined />} />
+                            <Button type={"text"} shape={"circle"} size={xs?"small":"large"} icon={<QuestionCircleOutlined />} />
                             <Dropdown
                             
                              onOpenChange={(open)=> setOpen(open)}
-                             placement={"bottomRight"}
+                             placement={i18n.language=="en"?"bottomRight":"bottomLeft"}
                              arrow={{pointAtCenter:false}}
                              trigger={['click']}
                              menu={{items}}>
-                                <Space className={styles.cursorPointer} size={"small"}>
+                                <Space className={styles.cursorPointer} size={!xs?"small":2}>
                                     {(lg||md) && <span>{`${user.firstName} ${user.lastName}`}</span>}
-                                    <Avatar icon={<UserOutlined />} />
+                                    <Avatar size={!xs?"default":"small"} icon={<UserOutlined />} />
                                     {open ? <UpOutlined /> : <DownOutlined />}
                                 </Space>
                             </Dropdown>

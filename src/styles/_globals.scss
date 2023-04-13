@@ -2,7 +2,7 @@ $textGray: #817B7B;
 $colorSecoundry:#E6E4F9;
 $colorPrimary:#7B68F6;
 $backGroundSuccess:#EEF9EB;
-@for $i from 0 through 15 {
+@for $i from 0 through 20 {
     // Paddings
     .p#{$i}{
         padding: #{$i}rem !important;

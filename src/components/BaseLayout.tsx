@@ -17,7 +17,7 @@ const {useBreakpoint} = Grid;
 const BaseLayout = ({title,PageComponent}:BaseLayoutProp) => {
     const [toggler, setToggler] = React.useState(false);
     const {i18n} = React.useContext(LangContext)
-    const {lg, md} = useBreakpoint();
+    const {lg, md,xl} = useBreakpoint();
     const {user} = React.useContext(Usercontext)
 
     return (
@@ -39,7 +39,7 @@ const BaseLayout = ({title,PageComponent}:BaseLayoutProp) => {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
         <Layout>
-          <Layout.Header className={(user? `${styles.borderBottom} `+ styles.px1 : !lg? !md? styles.px1 :styles.px2 :  styles.px10)}>
+          <Layout.Header className={(user? `${styles.borderBottom} `+ styles.px1 : !lg? !md? styles.px1 :styles.px2 :  !xl? styles.px10:styles.px19)}>
             <Navbar toggler={toggler} setToggler={setToggler} />
           </Layout.Header>
           <Layout hasSider className={styles.minHeightBody}>
@@ -48,7 +48,7 @@ const BaseLayout = ({title,PageComponent}:BaseLayoutProp) => {
                   <Sidebar toggler={toggler} setToggler={setToggler} />
               </ItemsProvider>
               }
-            <Layout.Content  className={user? styles.px0 : `${styles.main} ${styles.pt5} ` +  (!lg? !md? styles.px1 :styles.px2 :  styles.px10)}>
+            <Layout.Content  className={user? styles.px0 : `${styles.main} ${styles.pt5} ` +  (!lg? !md? styles.px1 :styles.px2 :  !xl? styles.px10:styles.px19)}>
               <PageComponent />
             </Layout.Content>
           </Layout>

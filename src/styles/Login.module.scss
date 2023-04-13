@@ -1,17 +1,22 @@
 @import "_globals";
 
-.leadingText{
-    z-index: 1;
+// .leadingText{
+//     z-index: 1;
+//     position: relative;
+// }
+
+.banner{
+        z-index: 1;
     position: relative;
     &:after{
         background:url(../../public/static/images/bg-login.png);
-        background-size: contain;
+        background-size: cover;
         background-repeat: no-repeat;
         content:"";
         width: 100%;
-        top: -11px;
+        top: 0;
         position: absolute;
-        height: 105%;
+        height: 100%;
         display: block;
         z-index: -1;
     }

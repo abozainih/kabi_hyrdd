@@ -2,9 +2,7 @@ import {Button, Typography, theme, Form, Input, Checkbox, Alert,Grid} from 'antd
 import {ExclamationCircleOutlined} from  "@ant-design/icons"
 import styles from "@/styles/Login.module.scss"
 import { signIn } from "next-auth/react"
-
 import React from 'react';
-import data from  "../userData.json"
 import Link from 'next/link';
 import { LangContext } from '@/contexts/lang';
 

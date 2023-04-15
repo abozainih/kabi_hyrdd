@@ -3,12 +3,12 @@ import type { MenuProps } from 'antd';
 import {MenuOutlined, BellOutlined, QuestionCircleOutlined, UserOutlined, DownOutlined, UpOutlined, LogoutOutlined} from  "@ant-design/icons"
 import styles from "@/styles/Navbar.module.scss"
 import React from 'react';
-import { Usercontext } from "@/contexts/user";
 import { TogglerProps } from "@/types/toggler";
 import { LangContext } from "@/contexts/lang";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from 'next/image'
+import { signOut, useSession } from "next-auth/react";
 
 
 const { useBreakpoint } = Grid;
@@ -17,32 +17,27 @@ const Navbar = ({setToggler}:TogglerProps) => {
 
     const {t,i18n} = React.useContext(LangContext)
     const router = useRouter()
+    const {data:session, status} = useSession()
     const {md,sm, lg,xs} = useBreakpoint();
-    const [open, setOpen] = React.useState<boolean>(false);
-    const {user, setUser} = React.useContext(Usercontext);
-    const Signout = ()=>{
-        setUser(null);
-        setOpen(false);
-    }
+    const [open, setOpen] = React.useState<boolean>(false)
     const items: MenuProps['items'] = [
           {
-            label: t("navbar:signout"),
+            label:t("navbar:signout"),
             icon: <LogoutOutlined />,
             danger:true,
             key: '3',
-            onClick:Signout
+            onClick:()=>signOut({redirect:false})
           },
     ]
-
-    if (!(lg||md) && user) {
+    if (!(lg||md) && session) {
         items.unshift({type:"divider"})
-        items.unshift({label:`${user.firstName} ${user.lastName}`,key:'6', style:{textAlign:"center"}})
+        items.unshift({label:session.user?.name,key:'6', style:{textAlign:"center"}})
       }
     return (
         <nav className={styles.navbar}>
             <Row align={"middle"} justify={"space-between"}>
                 <Col className={`${styles.dFlex} ${styles.aligItemsCenter}`}>
-                        {(!(lg) && user) && <MenuOutlined onClick={()=>setToggler(true)} className={`${styles.navBarIconMenu} `+(i18n.language=="en"?styles.mr1:styles.ml1)}/>}
+                        {(!(lg) && session) && <MenuOutlined onClick={()=>setToggler(true)} className={`${styles.navBarIconMenu} `+(i18n.language=="en"?styles.mr1:styles.ml1)}/>}
                         <Image width={((xs||sm) && !md)?90:200} height={((xs||sm) && !md)?20:32} src={"/static/images/LOGO-h-01.png"} alt="HYRDD" />
                 </Col>
                 <Col>
@@ -53,7 +48,7 @@ const Navbar = ({setToggler}:TogglerProps) => {
                             </Button>
                         </Link>
                     {
-                        user && 
+                        session && 
                         <>
                             <Button type={"text"} shape={"circle"} size={xs?"middle":"large"} icon={<BellOutlined />} />
                             <Button type={"text"} shape={"circle"} size={xs?"middle":"large"} icon={<QuestionCircleOutlined />} />
@@ -65,7 +60,7 @@ const Navbar = ({setToggler}:TogglerProps) => {
                              trigger={['click']}
                              menu={{items}}>
                                 <Space className={styles.cursorPointer} size={!xs?"small":"small"}>
-                                    {(lg||md) && <span>{`${user.firstName} ${user.lastName}`}</span>}
+                                    {(lg||md) && <span>{session.user?.name}</span>}
                                     <Avatar size={!xs?"default":"small"} icon={<UserOutlined />} />
                                     {open ? <UpOutlined /> : <DownOutlined />}
                                 </Space>

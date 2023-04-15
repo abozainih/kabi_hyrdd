@@ -1,9 +1,9 @@
 import React from 'react';
 import BaseLayout from '@/components/BaseLayout';
 import LoginPage from '@/components/LoginPage';
-import { Usercontext } from '@/contexts/user';
 import  Router  from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useSession } from 'next-auth/react';
 
 export async function getStaticProps({ locale }:{locale:string}) {
   return {
@@ -16,13 +16,23 @@ export async function getStaticProps({ locale }:{locale:string}) {
   }
 }
 const Login = () => {
-    const {user} = React.useContext(Usercontext)
-    React.useEffect(() => {
-        if (user) Router.push("/dashboard");
-    }, [user]);
-    return ( 
-      !user && <BaseLayout title='Login' PageComponent={LoginPage} />
-    );
+  const { status } = useSession()
+
+  React.useEffect(()=>{
+    if(status=="authenticated"){
+      Router.push("/dashboard")
+    }
+  })
+
+  if (status === "loading") {
+    return <p>Loading....</p>
+  }
+  if (status === "authenticated") {
+    return <p>redirect to panel...</p>
+  }
+  return ( 
+      <BaseLayout title='Login' PageComponent={LoginPage} />
+  )
 }
  
 export default Login;

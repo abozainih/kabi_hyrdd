@@ -1,6 +1,8 @@
 import {Button, Typography, theme, Form, Input, Checkbox, Alert,Grid} from 'antd';
 import {ExclamationCircleOutlined} from  "@ant-design/icons"
 import styles from "@/styles/Login.module.scss"
+import { signIn } from "next-auth/react"
+
 import React from 'react';
 import data from  "../userData.json"
 import Link from 'next/link';
@@ -9,13 +11,11 @@ import { LangContext } from '@/contexts/lang';
 
 const {useBreakpoint} = Grid
 const LoginForm = ()=>{
-    const {sm,xs,md,lg} = useBreakpoint()
-    const { token } = theme.useToken();
+    const {sm,xs,md} = useBreakpoint()
     const {t,i18n} = React.useContext(LangContext)
     const [error,setError] = React.useState<{email:boolean,password:boolean}>({email:false,password:false})
     const [form] = Form.useForm()
     const [showAlert,setShowAlert] = React.useState<boolean>(false)
-    const {setUser} = React.useContext(Usercontext)
 
     const onChange = (e: React.FormEvent<HTMLInputElement>) => {
         e.currentTarget.type == "email"?
@@ -29,10 +29,8 @@ const LoginForm = ()=>{
       }
 
     const onFinish = (values:any)=>{
-        if(data.some(user => user.email == values.email && user.password == values.password))
-        {
-          setUser(data.filter(user=> user.email == values.email && user.password == values.password)[0]);
-        }else setShowAlert(true)
+        signIn("credentials",{username:values.email,password:values.password,redirect:false})
+        .then(data=>data?.error? setShowAlert(true):setShowAlert(false))
     }
 
     const onFinishFeild = ()=>{

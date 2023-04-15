@@ -4,9 +4,14 @@ import Link from 'next/link';
 import LoginForm from "./LoginForm"
 import React from 'react';
 import { LangContext } from '@/contexts/lang';
+import { useSession } from "next-auth/react"
+
+
 
 const {useBreakpoint} = Grid
 const LoginPage = () => {
+    const { data: session, status } = useSession()
+    console.log(status)
     const {xs,sm} = useBreakpoint()
     const {t,i18n} = React.useContext(LangContext)
     return ( 

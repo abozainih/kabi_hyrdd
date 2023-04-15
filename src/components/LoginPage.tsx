@@ -9,8 +9,6 @@ const {useBreakpoint} = Grid
 const LoginPage = () => {
     const {xs,sm} = useBreakpoint()
     const {t,i18n} = React.useContext(LangContext)
-    console.log(useBreakpoint())
-
     return ( 
         <Row className={styles.h100} align="middle" gutter={[0,25]} justify={"space-between"}>
             <Col xs={xs?24:undefined} sm={sm?24:undefined} md={12} className={`${styles.banner} ` + (i18n.language=="ar" && styles.rotateRight)}>

@@ -7,7 +7,6 @@ const CreateForm = ({open,setOpen,setDataCard}: CreateFormProps) => {
   const [form] = Form.useForm();
   const onFinish = (values: any) => {
     setDataCard(prevData => [{...values,id: prevData.length+1},...prevData])
-    console.log(values)
     form.resetFields()
     setOpen(false)
   }

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Usercontext } from '@/contexts/user'
 import Router from 'next/router'
 import { useSession } from 'next-auth/react'
 

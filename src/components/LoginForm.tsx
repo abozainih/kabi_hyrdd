@@ -6,7 +6,6 @@ import { signIn } from "next-auth/react"
 import React from 'react';
 import data from  "../userData.json"
 import Link from 'next/link';
-import { Usercontext } from '@/contexts/user';
 import { LangContext } from '@/contexts/lang';
 
 const {useBreakpoint} = Grid

@@ -1,11 +1,23 @@
 import React from 'react'
-import { Usercontext } from '@/contexts/user'
 import Router from 'next/router'
+import { useSession } from 'next-auth/react'
 
 export default function Home() {
-  const {user} = React.useContext(Usercontext)
+  
+  const { status } = useSession()
+
   React.useEffect(()=>{
-    user ? Router.push("/dashboard") : Router.push("/login")
-  })
-  return;
+    if(status=="unauthenticated"){
+      Router.push("/login")
+    }else if(status =="authenticated"){
+      Router.push("/dashboard")
+  }})
+  
+  if(status=="authenticated"){
+    return <p>redirect to panel...</p>
+  }else if(status=="unauthenticated"){
+    return <p>redirect to login page..</p>
+  }else{
+    return <p>Loading page ....</p>
+  }
 }
